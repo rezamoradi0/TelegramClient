@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1444661369)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1444661369)]
     public class TlContactBlocked : TlObject
     {
-        public override int Constructor => 1444661369;
-
+        [SerializationOrder(0)]
         public int UserId { get; set; }
+
+        [SerializationOrder(1)]
         public int Date { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            UserId = br.ReadInt32();
-            Date = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(UserId);
-            bw.Write(Date);
-        }
     }
 }

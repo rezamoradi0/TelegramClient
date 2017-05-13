@@ -2,33 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1910892683)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1910892683)]
     public class TlNearestDc : TlObject
     {
-        public override int Constructor => -1910892683;
-
+        [SerializationOrder(0)]
         public string Country { get; set; }
+
+        [SerializationOrder(1)]
         public int ThisDc { get; set; }
+
+        [SerializationOrder(2)]
         public int NearestDc { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Country = StringUtil.Deserialize(br);
-            ThisDc = br.ReadInt32();
-            NearestDc = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Country, bw);
-            bw.Write(ThisDc);
-            bw.Write(NearestDc);
-        }
     }
 }

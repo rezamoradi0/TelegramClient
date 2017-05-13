@@ -2,39 +2,24 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Updates
 {
-    [SerializeAttribute(-1519637954)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1519637954)]
     public class TlState : TlObject
     {
-        public override int Constructor => -1519637954;
-
+        [SerializationOrder(0)]
         public int Pts { get; set; }
+
+        [SerializationOrder(1)]
         public int Qts { get; set; }
+
+        [SerializationOrder(2)]
         public int Date { get; set; }
+
+        [SerializationOrder(3)]
         public int Seq { get; set; }
+
+        [SerializationOrder(4)]
         public int UnreadCount { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Pts = br.ReadInt32();
-            Qts = br.ReadInt32();
-            Date = br.ReadInt32();
-            Seq = br.ReadInt32();
-            UnreadCount = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Pts);
-            bw.Write(Qts);
-            bw.Write(Date);
-            bw.Write(Seq);
-            bw.Write(UnreadCount);
-        }
     }
 }

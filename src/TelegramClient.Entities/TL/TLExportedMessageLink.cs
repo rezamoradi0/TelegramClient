@@ -2,27 +2,12 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(524838915)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(524838915)]
     public class TlExportedMessageLink : TlObject
     {
-        public override int Constructor => 524838915;
-
+        [SerializationOrder(0)]
         public string Link { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Link = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Link, bw);
-        }
     }
 }

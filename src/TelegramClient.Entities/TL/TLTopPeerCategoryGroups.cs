@@ -2,23 +2,10 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1122524854)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1122524854)]
     public class TlTopPeerCategoryGroups : TlAbsTopPeerCategory
     {
-        public override int Constructor => -1122524854;
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-        }
     }
 }

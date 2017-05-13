@@ -2,23 +2,10 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1343122938)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1343122938)]
     public class TlPrivacyKeyChatInvite : TlAbsPrivacyKey
     {
-        public override int Constructor => 1343122938;
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-        }
     }
 }

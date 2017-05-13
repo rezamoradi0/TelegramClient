@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1739392570)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1739392570)]
     public class TlDocumentAttributeAudio : TlAbsDocumentAttribute
     {
-        public override int Constructor => -1739392570;
-
         public int Flags { get; set; }
         public bool Voice { get; set; }
         public int Duration { get; set; }

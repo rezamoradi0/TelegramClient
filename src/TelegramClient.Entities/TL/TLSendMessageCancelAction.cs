@@ -2,23 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-44119819)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-44119819)]
     public class TlSendMessageCancelAction : TlAbsSendMessageAction
     {
-        public override int Constructor => -44119819;
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-        }
+       
     }
 }

@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-847783593)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-847783593)]
     public class TlChannelMessagesFilter : TlAbsChannelMessagesFilter
     {
-        public override int Constructor => -847783593;
-
         public int Flags { get; set; }
         public bool ExcludeNewMessages { get; set; }
         public TlVector<TlMessageRange> Ranges { get; set; }

@@ -2,29 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Photos
 {
-    [SerializeAttribute(-2016444625)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-2016444625)]
     public class TlRequestDeletePhotos : TlMethod
     {
-        public override int Constructor => -2016444625;
-
+        [SerializationOrder(0)]
         public TlVector<TlAbsInputPhoto> Id { get; set; }
+
         public TlVector<long> Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = ObjectUtils.DeserializeVector<TlAbsInputPhoto>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Id, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

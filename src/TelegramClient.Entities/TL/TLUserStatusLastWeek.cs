@@ -2,23 +2,10 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(129960444)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(129960444)]
     public class TlUserStatusLastWeek : TlAbsUserStatus
     {
-        public override int Constructor => 129960444;
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-        }
     }
 }

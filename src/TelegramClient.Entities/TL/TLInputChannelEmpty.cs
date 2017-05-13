@@ -2,23 +2,10 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-292807034)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-292807034)]
     public class TlInputChannelEmpty : TlAbsInputChannel
     {
-        public override int Constructor => -292807034;
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-        }
     }
 }

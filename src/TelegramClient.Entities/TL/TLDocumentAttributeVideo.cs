@@ -2,33 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1494273227)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1494273227)]
     public class TlDocumentAttributeVideo : TlAbsDocumentAttribute
     {
-        public override int Constructor => 1494273227;
-
+        [SerializationOrder(0)]
         public int Duration { get; set; }
+
+        [SerializationOrder(1)]
         public int W { get; set; }
+
+        [SerializationOrder(2)]
         public int H { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Duration = br.ReadInt32();
-            W = br.ReadInt32();
-            H = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Duration);
-            bw.Write(W);
-            bw.Write(H);
-        }
     }
 }

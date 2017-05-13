@@ -112,7 +112,7 @@ namespace TelegramClient.Core
             ProtoRecieveService.StartReceiving();
 
             var response = await SendRequestAsync<TlConfig>(new TlRequestInvokeWithLayer {Layer = 57, Query = request});
-            _dcOptions = response.DcOptions.Lists;
+            _dcOptions = response.DcOptions.Collection;
         }
 
         public async Task ReconnectToDcAsync(int dcId)

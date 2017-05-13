@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1503425638)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1503425638)]
     public class TlMessageActionChatCreate : TlAbsMessageAction
     {
-        public override int Constructor => -1503425638;
-
+        [SerializationOrder(0)]
         public string Title { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<int> Users { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Title = StringUtil.Deserialize(br);
-            Users = ObjectUtils.DeserializeVector<int>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Title, bw);
-            ObjectUtils.SerializeObject(Users, bw);
-        }
     }
 }

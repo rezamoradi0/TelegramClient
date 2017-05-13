@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-200242528)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-200242528)]
     public class TlReplyKeyboardForceReply : TlAbsReplyMarkup
     {
-        public override int Constructor => -200242528;
-
         public int Flags { get; set; }
         public bool SingleUse { get; set; }
         public bool Selective { get; set; }

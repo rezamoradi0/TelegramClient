@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1996904104)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1996904104)]
     public class TlInputAppEvent : TlObject
     {
-        public override int Constructor => 1996904104;
-
+        [SerializationOrder(0)]
         public double Time { get; set; }
+
+        [SerializationOrder(1)]
         public string Type { get; set; }
+
+        [SerializationOrder(2)]
         public long Peer { get; set; }
+
+        [SerializationOrder(3)]
         public string Data { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Time = br.ReadDouble();
-            Type = StringUtil.Deserialize(br);
-            Peer = br.ReadInt64();
-            Data = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Time);
-            StringUtil.Serialize(Type, bw);
-            bw.Write(Peer);
-            StringUtil.Serialize(Data, bw);
-        }
     }
 }

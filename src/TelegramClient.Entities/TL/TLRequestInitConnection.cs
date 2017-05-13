@@ -2,44 +2,31 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1769565673)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1769565673)]
     public class TlRequestInitConnection : TlMethod
     {
-        public override int Constructor => 1769565673;
-
+        [SerializationOrder(0)]
         public int ApiId { get; set; }
+
+        [SerializationOrder(1)]
         public string DeviceModel { get; set; }
+
+        [SerializationOrder(2)]
         public string SystemVersion { get; set; }
+
+        [SerializationOrder(3)]
         public string AppVersion { get; set; }
+
+        [SerializationOrder(4)]
         public string LangCode { get; set; }
+
+        [SerializationOrder(5)]
         public TlObject Query { get; set; }
+
+        [SerializationOrder(6)]
         public TlObject Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            ApiId = br.ReadInt32();
-            DeviceModel = StringUtil.Deserialize(br);
-            SystemVersion = StringUtil.Deserialize(br);
-            AppVersion = StringUtil.Deserialize(br);
-            LangCode = StringUtil.Deserialize(br);
-            Query = (TlObject) ObjectUtils.DeserializeObject(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(ApiId);
-            StringUtil.Serialize(DeviceModel, bw);
-            StringUtil.Serialize(SystemVersion, bw);
-            StringUtil.Serialize(AppVersion, bw);
-            StringUtil.Serialize(LangCode, bw);
-            ObjectUtils.SerializeObject(Query, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

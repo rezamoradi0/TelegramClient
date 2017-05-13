@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1678812626)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1678812626)]
     public class TlStickerSetCovered : TlAbsStickerSetCovered
     {
-        public override int Constructor => 1678812626;
-
+        [SerializationOrder(0)]
         public TlStickerSet Set { get; set; }
+
+        [SerializationOrder(1)]
         public TlAbsDocument Cover { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Set = (TlStickerSet) ObjectUtils.DeserializeObject(br);
-            Cover = (TlAbsDocument) ObjectUtils.DeserializeObject(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Set, bw);
-            ObjectUtils.SerializeObject(Cover, bw);
-        }
     }
 }

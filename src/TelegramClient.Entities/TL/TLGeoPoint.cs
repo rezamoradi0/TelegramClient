@@ -2,7 +2,9 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(541710092)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(541710092)]
     public class TlGeoPoint : TlAbsGeoPoint
     {
         public override int Constructor => 541710092;

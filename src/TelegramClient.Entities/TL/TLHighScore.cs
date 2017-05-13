@@ -2,33 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1493171408)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1493171408)]
     public class TlHighScore : TlObject
     {
-        public override int Constructor => 1493171408;
-
+        [SerializationOrder(0)]
         public int Pos { get; set; }
+
+        [SerializationOrder(1)]
         public int UserId { get; set; }
+
+        [SerializationOrder(2)]
         public int Score { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Pos = br.ReadInt32();
-            UserId = br.ReadInt32();
-            Score = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Pos);
-            bw.Write(UserId);
-            bw.Write(Score);
-        }
     }
 }

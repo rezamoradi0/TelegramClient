@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1009430225)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1009430225)]
     public class TlChannelFull : TlAbsChatFull
     {
-        public override int Constructor => -1009430225;
-
         public int Flags { get; set; }
         public bool CanViewParticipants { get; set; }
         public bool CanSetUsername { get; set; }

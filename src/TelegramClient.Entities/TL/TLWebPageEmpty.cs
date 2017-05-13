@@ -2,27 +2,12 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-350980120)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-350980120)]
     public class TlWebPageEmpty : TlAbsWebPage
     {
-        public override int Constructor => -350980120;
-
+        [SerializationOrder(0)]
         public long Id { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = br.ReadInt64();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Id);
-        }
     }
 }

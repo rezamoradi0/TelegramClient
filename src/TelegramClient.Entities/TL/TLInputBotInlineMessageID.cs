@@ -2,33 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1995686519)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1995686519)]
     public class TlInputBotInlineMessageId : TlObject
     {
-        public override int Constructor => -1995686519;
-
+        [SerializationOrder(0)]
         public int DcId { get; set; }
+
+        [SerializationOrder(1)]
         public long Id { get; set; }
+
+        [SerializationOrder(2)]
         public long AccessHash { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            DcId = br.ReadInt32();
-            Id = br.ReadInt64();
-            AccessHash = br.ReadInt64();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(DcId);
-            bw.Write(Id);
-            bw.Write(AccessHash);
-        }
     }
 }

@@ -2,35 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Updates
 {
-    [SerializeAttribute(168039573)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(168039573)]
     public class TlRequestGetDifference : TlMethod
     {
-        public override int Constructor => 168039573;
-
+        [SerializationOrder(0)]
         public int Pts { get; set; }
+
+        [SerializationOrder(1)]
         public int Date { get; set; }
+
+        [SerializationOrder(2)]
         public int Qts { get; set; }
+
         public TlAbsDifference Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Pts = br.ReadInt32();
-            Date = br.ReadInt32();
-            Qts = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Pts);
-            bw.Write(Date);
-            bw.Write(Qts);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

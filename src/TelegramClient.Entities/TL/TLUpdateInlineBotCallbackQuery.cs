@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-103646630)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-103646630)]
     public class TlUpdateInlineBotCallbackQuery : TlAbsUpdate
     {
-        public override int Constructor => -103646630;
-
         public int Flags { get; set; }
         public long QueryId { get; set; }
         public int UserId { get; set; }

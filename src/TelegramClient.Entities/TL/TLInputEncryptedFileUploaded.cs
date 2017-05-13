@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1690108678)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1690108678)]
     public class TlInputEncryptedFileUploaded : TlAbsInputEncryptedFile
     {
-        public override int Constructor => 1690108678;
-
+        [SerializationOrder(0)]
         public long Id { get; set; }
+
+        [SerializationOrder(1)]
         public int Parts { get; set; }
+
+        [SerializationOrder(2)]
         public string Md5Checksum { get; set; }
+
+        [SerializationOrder(3)]
         public int KeyFingerprint { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = br.ReadInt64();
-            Parts = br.ReadInt32();
-            Md5Checksum = StringUtil.Deserialize(br);
-            KeyFingerprint = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Id);
-            bw.Write(Parts);
-            StringUtil.Serialize(Md5Checksum, bw);
-            bw.Write(KeyFingerprint);
-        }
     }
 }

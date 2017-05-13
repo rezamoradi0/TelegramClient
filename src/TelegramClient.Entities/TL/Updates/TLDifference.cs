@@ -2,42 +2,27 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Updates
 {
-    [SerializeAttribute(16030880)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(16030880)]
     public class TlDifference : TlAbsDifference
     {
-        public override int Constructor => 16030880;
-
+        [SerializationOrder(0)]
         public TlVector<TlAbsMessage> NewMessages { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<TlAbsEncryptedMessage> NewEncryptedMessages { get; set; }
+
+        [SerializationOrder(2)]
         public TlVector<TlAbsUpdate> OtherUpdates { get; set; }
+
+        [SerializationOrder(3)]
         public TlVector<TlAbsChat> Chats { get; set; }
+
+        [SerializationOrder(4)]
         public TlVector<TlAbsUser> Users { get; set; }
+
+        [SerializationOrder(5)]
         public TlState State { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            NewMessages = ObjectUtils.DeserializeVector<TlAbsMessage>(br);
-            NewEncryptedMessages = ObjectUtils.DeserializeVector<TlAbsEncryptedMessage>(br);
-            OtherUpdates = ObjectUtils.DeserializeVector<TlAbsUpdate>(br);
-            Chats = ObjectUtils.DeserializeVector<TlAbsChat>(br);
-            Users = ObjectUtils.DeserializeVector<TlAbsUser>(br);
-            State = (TlState) ObjectUtils.DeserializeObject(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(NewMessages, bw);
-            ObjectUtils.SerializeObject(NewEncryptedMessages, bw);
-            ObjectUtils.SerializeObject(OtherUpdates, bw);
-            ObjectUtils.SerializeObject(Chats, bw);
-            ObjectUtils.SerializeObject(Users, bw);
-            ObjectUtils.SerializeObject(State, bw);
-        }
     }
 }

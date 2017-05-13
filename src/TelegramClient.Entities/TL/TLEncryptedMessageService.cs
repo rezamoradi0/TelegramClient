@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(594758406)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(594758406)]
     public class TlEncryptedMessageService : TlAbsEncryptedMessage
     {
-        public override int Constructor => 594758406;
-
+        [SerializationOrder(0)]
         public long RandomId { get; set; }
+
+        [SerializationOrder(1)]
         public int ChatId { get; set; }
+
+        [SerializationOrder(2)]
         public int Date { get; set; }
+
+        [SerializationOrder(3)]
         public byte[] Bytes { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            RandomId = br.ReadInt64();
-            ChatId = br.ReadInt32();
-            Date = br.ReadInt32();
-            Bytes = BytesUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(RandomId);
-            bw.Write(ChatId);
-            bw.Write(Date);
-            BytesUtil.Serialize(Bytes, bw);
-        }
     }
 }

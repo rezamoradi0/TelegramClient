@@ -2,27 +2,12 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-64092740)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-64092740)]
     public class TlChatInviteExported : TlAbsExportedChatInvite
     {
-        public override int Constructor => -64092740;
-
+        [SerializationOrder(0)]
         public string Link { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Link = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Link, bw);
-        }
     }
 }

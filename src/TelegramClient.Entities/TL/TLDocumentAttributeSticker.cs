@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1662637586)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1662637586)]
     public class TlDocumentAttributeSticker : TlAbsDocumentAttribute
     {
-        public override int Constructor => 1662637586;
-
         public int Flags { get; set; }
         public bool Mask { get; set; }
         public string Alt { get; set; }

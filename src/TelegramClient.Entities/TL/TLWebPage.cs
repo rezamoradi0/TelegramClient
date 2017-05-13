@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-897446185)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-897446185)]
     public class TlWebPage : TlAbsWebPage
     {
-        public override int Constructor => -897446185;
-
         public int Flags { get; set; }
         public long Id { get; set; }
         public string Url { get; set; }

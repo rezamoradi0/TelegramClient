@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1697798976)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1697798976)]
     public class TlPeerNotifySettings : TlAbsPeerNotifySettings
     {
-        public override int Constructor => -1697798976;
-
         public int Flags { get; set; }
         public bool ShowPreviews { get; set; }
         public bool Silent { get; set; }

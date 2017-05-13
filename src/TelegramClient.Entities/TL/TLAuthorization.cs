@@ -2,65 +2,48 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(2079516406)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(2079516406)]
     public class TlAuthorization : TlObject
     {
-        public override int Constructor => 2079516406;
-
+        [SerializationOrder(0)]
         public long Hash { get; set; }
+
+        [SerializationOrder(1)]
         public int Flags { get; set; }
+
+        [SerializationOrder(2)]
         public string DeviceModel { get; set; }
+
+        [SerializationOrder(3)]
         public string Platform { get; set; }
+
+        [SerializationOrder(4)]
         public string SystemVersion { get; set; }
+
+        [SerializationOrder(5)]
         public int ApiId { get; set; }
+
+        [SerializationOrder(6)]
         public string AppName { get; set; }
+
+        [SerializationOrder(7)]
         public string AppVersion { get; set; }
+
+        [SerializationOrder(8)]
         public int DateCreated { get; set; }
+
+        [SerializationOrder(9)]
         public int DateActive { get; set; }
+
+        [SerializationOrder(10)]
         public string Ip { get; set; }
+
+        [SerializationOrder(11)]
         public string Country { get; set; }
+
+        [SerializationOrder(12)]
         public string Region { get; set; }
-
-
-        public void ComputeFlags()
-        {
-            Flags = 0;
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Hash = br.ReadInt64();
-            Flags = br.ReadInt32();
-            DeviceModel = StringUtil.Deserialize(br);
-            Platform = StringUtil.Deserialize(br);
-            SystemVersion = StringUtil.Deserialize(br);
-            ApiId = br.ReadInt32();
-            AppName = StringUtil.Deserialize(br);
-            AppVersion = StringUtil.Deserialize(br);
-            DateCreated = br.ReadInt32();
-            DateActive = br.ReadInt32();
-            Ip = StringUtil.Deserialize(br);
-            Country = StringUtil.Deserialize(br);
-            Region = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ComputeFlags();
-            bw.Write(Flags);
-            bw.Write(Hash);
-            StringUtil.Serialize(DeviceModel, bw);
-            StringUtil.Serialize(Platform, bw);
-            StringUtil.Serialize(SystemVersion, bw);
-            bw.Write(ApiId);
-            StringUtil.Serialize(AppName, bw);
-            StringUtil.Serialize(AppVersion, bw);
-            bw.Write(DateCreated);
-            bw.Write(DateActive);
-            StringUtil.Serialize(Ip, bw);
-            StringUtil.Serialize(Country, bw);
-            StringUtil.Serialize(Region, bw);
-        }
     }
 }

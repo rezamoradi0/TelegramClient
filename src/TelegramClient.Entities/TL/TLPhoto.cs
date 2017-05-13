@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1836524247)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1836524247)]
     public class TlPhoto : TlAbsPhoto
     {
-        public override int Constructor => -1836524247;
-
         public int Flags { get; set; }
         public bool HasStickers { get; set; }
         public long Id { get; set; }

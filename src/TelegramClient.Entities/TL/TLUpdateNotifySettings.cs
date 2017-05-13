@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1094555409)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1094555409)]
     public class TlUpdateNotifySettings : TlAbsUpdate
     {
-        public override int Constructor => -1094555409;
-
+        [SerializationOrder(0)]
         public TlAbsNotifyPeer Peer { get; set; }
+
+        [SerializationOrder(1)]
         public TlAbsPeerNotifySettings NotifySettings { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Peer = (TlAbsNotifyPeer) ObjectUtils.DeserializeObject(br);
-            NotifySettings = (TlAbsPeerNotifySettings) ObjectUtils.DeserializeObject(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Peer, bw);
-            ObjectUtils.SerializeObject(NotifySettings, bw);
-        }
     }
 }

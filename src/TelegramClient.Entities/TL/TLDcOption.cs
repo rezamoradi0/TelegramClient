@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(98092748)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(98092748)]
     public class TlDcOption : TlObject
     {
-        public override int Constructor => 98092748;
-
         public int Flags { get; set; }
         public bool Ipv6 { get; set; }
         public bool MediaOnly { get; set; }

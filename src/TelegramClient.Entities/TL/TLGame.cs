@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1107729093)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1107729093)]
     public class TlGame : TlObject
     {
-        public override int Constructor => -1107729093;
-
         public int Flags { get; set; }
         public long Id { get; set; }
         public long AccessHash { get; set; }

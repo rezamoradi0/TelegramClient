@@ -2,42 +2,27 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(771925524)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(771925524)]
     public class TlChatFull : TlAbsChatFull
     {
-        public override int Constructor => 771925524;
-
+        [SerializationOrder(0)]
         public int Id { get; set; }
+
+        [SerializationOrder(1)]
         public TlAbsChatParticipants Participants { get; set; }
+
+        [SerializationOrder(2)]
         public TlAbsPhoto ChatPhoto { get; set; }
+
+        [SerializationOrder(3)]
         public TlAbsPeerNotifySettings NotifySettings { get; set; }
+
+        [SerializationOrder(4)]
         public TlAbsExportedChatInvite ExportedInvite { get; set; }
+
+        [SerializationOrder(5)]
         public TlVector<TlBotInfo> BotInfo { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = br.ReadInt32();
-            Participants = (TlAbsChatParticipants) ObjectUtils.DeserializeObject(br);
-            ChatPhoto = (TlAbsPhoto) ObjectUtils.DeserializeObject(br);
-            NotifySettings = (TlAbsPeerNotifySettings) ObjectUtils.DeserializeObject(br);
-            ExportedInvite = (TlAbsExportedChatInvite) ObjectUtils.DeserializeObject(br);
-            BotInfo = ObjectUtils.DeserializeVector<TlBotInfo>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Id);
-            ObjectUtils.SerializeObject(Participants, bw);
-            ObjectUtils.SerializeObject(ChatPhoto, bw);
-            ObjectUtils.SerializeObject(NotifySettings, bw);
-            ObjectUtils.SerializeObject(ExportedInvite, bw);
-            ObjectUtils.SerializeObject(BotInfo, bw);
-        }
     }
 }

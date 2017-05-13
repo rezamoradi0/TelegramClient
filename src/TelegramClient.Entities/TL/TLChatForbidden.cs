@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(120753115)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(120753115)]
     public class TlChatForbidden : TlAbsChat
     {
-        public override int Constructor => 120753115;
-
+        [SerializationOrder(0)]
         public int Id { get; set; }
+
+        [SerializationOrder(1)]
         public string Title { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = br.ReadInt32();
-            Title = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Id);
-            StringUtil.Serialize(Title, bw);
-        }
     }
 }

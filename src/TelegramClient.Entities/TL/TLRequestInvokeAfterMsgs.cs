@@ -2,32 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1036301552)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1036301552)]
     public class TlRequestInvokeAfterMsgs : TlMethod
     {
-        public override int Constructor => 1036301552;
-
+        [SerializationOrder(0)]
         public TlVector<long> MsgIds { get; set; }
+
+        [SerializationOrder(1)]
         public TlObject Query { get; set; }
+
         public TlObject Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            MsgIds = ObjectUtils.DeserializeVector<long>(br);
-            Query = (TlObject) ObjectUtils.DeserializeObject(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(MsgIds, bw);
-            ObjectUtils.SerializeObject(Query, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

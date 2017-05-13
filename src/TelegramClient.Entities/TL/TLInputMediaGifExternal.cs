@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1212395773)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1212395773)]
     public class TlInputMediaGifExternal : TlAbsInputMedia
     {
-        public override int Constructor => 1212395773;
-
+        [SerializationOrder(0)]
         public string Url { get; set; }
+
+        [SerializationOrder(1)]
         public string Q { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Url = StringUtil.Deserialize(br);
-            Q = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Url, bw);
-            StringUtil.Serialize(Q, bw);
-        }
     }
 }

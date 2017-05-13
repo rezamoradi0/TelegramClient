@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(629866245)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(629866245)]
     public class TlKeyboardButtonUrl : TlAbsKeyboardButton
     {
-        public override int Constructor => 629866245;
-
+        [SerializationOrder(0)]
         public string Text { get; set; }
+
+        [SerializationOrder(1)]
         public string Url { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Text = StringUtil.Deserialize(br);
-            Url = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Text, bw);
-            StringUtil.Serialize(Url, bw);
-        }
     }
 }

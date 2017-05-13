@@ -2,29 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Users
 {
-    [SerializeAttribute(-902781519)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-902781519)]
     public class TlRequestGetFullUser : TlMethod
     {
-        public override int Constructor => -902781519;
-
+        [SerializationOrder(0)]
         public TlAbsInputUser Id { get; set; }
+
         public TlUserFull Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = (TlAbsInputUser) ObjectUtils.DeserializeObject(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Id, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

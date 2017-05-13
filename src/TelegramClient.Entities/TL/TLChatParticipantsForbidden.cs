@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-57668565)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-57668565)]
     public class TlChatParticipantsForbidden : TlAbsChatParticipants
     {
-        public override int Constructor => -57668565;
-
         public int Flags { get; set; }
         public int ChatId { get; set; }
         public TlAbsChatParticipant SelfParticipant { get; set; }

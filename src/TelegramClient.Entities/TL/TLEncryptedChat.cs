@@ -2,45 +2,30 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-94974410)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-94974410)]
     public class TlEncryptedChat : TlAbsEncryptedChat
     {
-        public override int Constructor => -94974410;
-
+        [SerializationOrder(0)]
         public int Id { get; set; }
+
+        [SerializationOrder(1)]
         public long AccessHash { get; set; }
+
+        [SerializationOrder(2)]
         public int Date { get; set; }
+
+        [SerializationOrder(3)]
         public int AdminId { get; set; }
+
+        [SerializationOrder(4)]
         public int ParticipantId { get; set; }
+
+        [SerializationOrder(5)]
         public byte[] GAOrB { get; set; }
+
+        [SerializationOrder(6)]
         public long KeyFingerprint { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = br.ReadInt32();
-            AccessHash = br.ReadInt64();
-            Date = br.ReadInt32();
-            AdminId = br.ReadInt32();
-            ParticipantId = br.ReadInt32();
-            GAOrB = BytesUtil.Deserialize(br);
-            KeyFingerprint = br.ReadInt64();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Id);
-            bw.Write(AccessHash);
-            bw.Write(Date);
-            bw.Write(AdminId);
-            bw.Write(ParticipantId);
-            BytesUtil.Serialize(GAOrB, bw);
-            bw.Write(KeyFingerprint);
-        }
     }
 }

@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-352032773)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-352032773)]
     public class TlUpdateChannelTooLong : TlAbsUpdate
     {
-        public override int Constructor => -352032773;
-
         public int Flags { get; set; }
         public int ChannelId { get; set; }
         public int? Pts { get; set; }

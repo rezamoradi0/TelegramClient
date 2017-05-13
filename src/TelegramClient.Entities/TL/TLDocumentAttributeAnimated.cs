@@ -2,23 +2,10 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(297109817)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(297109817)]
     public class TlDocumentAttributeAnimated : TlAbsDocumentAttribute
     {
-        public override int Constructor => 297109817;
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-        }
     }
 }

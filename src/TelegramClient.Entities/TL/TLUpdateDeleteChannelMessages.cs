@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1015733815)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1015733815)]
     public class TlUpdateDeleteChannelMessages : TlAbsUpdate
     {
-        public override int Constructor => -1015733815;
-
+        [SerializationOrder(0)]
         public int ChannelId { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<int> Messages { get; set; }
+
+        [SerializationOrder(2)]
         public int Pts { get; set; }
+
+        [SerializationOrder(3)]
         public int PtsCount { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            ChannelId = br.ReadInt32();
-            Messages = ObjectUtils.DeserializeVector<int>(br);
-            Pts = br.ReadInt32();
-            PtsCount = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(ChannelId);
-            ObjectUtils.SerializeObject(Messages, bw);
-            bw.Write(Pts);
-            bw.Write(PtsCount);
-        }
     }
 }

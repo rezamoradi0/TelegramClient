@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(301019932)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(301019932)]
     public class TlUpdateShortSentMessage : TlAbsUpdates
     {
-        public override int Constructor => 301019932;
-
         public int Flags { get; set; }
         public bool Out { get; set; }
         public int Id { get; set; }

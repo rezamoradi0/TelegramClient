@@ -2,27 +2,12 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1218642516)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1218642516)]
     public class TlReplyInlineMarkup : TlAbsReplyMarkup
     {
-        public override int Constructor => 1218642516;
-
+        [SerializationOrder(0)]
         public TlVector<TlKeyboardButtonRow> Rows { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Rows = ObjectUtils.DeserializeVector<TlKeyboardButtonRow>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Rows, bw);
-        }
     }
 }

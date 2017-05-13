@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1020139510)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1020139510)]
     public class TlInputGameShortName : TlAbsInputGame
     {
-        public override int Constructor => -1020139510;
-
+        [SerializationOrder(1)]
         public TlAbsInputUser BotId { get; set; }
+
+        [SerializationOrder(2)]
         public string ShortName { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            BotId = (TlAbsInputUser) ObjectUtils.DeserializeObject(br);
-            ShortName = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(BotId, bw);
-            StringUtil.Serialize(ShortName, bw);
-        }
     }
 }

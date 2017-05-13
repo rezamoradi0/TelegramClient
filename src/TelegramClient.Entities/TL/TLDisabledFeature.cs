@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1369215196)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1369215196)]
     public class TlDisabledFeature : TlObject
     {
-        public override int Constructor => -1369215196;
-
+        [SerializationOrder(0)]
         public string Feature { get; set; }
+
+        [SerializationOrder(1)]
         public string Description { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Feature = StringUtil.Deserialize(br);
-            Description = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Feature, bw);
-            StringUtil.Serialize(Description, bw);
-        }
     }
 }

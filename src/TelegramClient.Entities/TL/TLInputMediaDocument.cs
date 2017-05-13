@@ -2,30 +2,16 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(444068508)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(444068508)]
     public class TlInputMediaDocument : TlAbsInputMedia
     {
-        public override int Constructor => 444068508;
 
+        [SerializationOrder(0)]
         public TlAbsInputDocument Id { get; set; }
+
+        [SerializationOrder(1)]
         public string Caption { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = (TlAbsInputDocument) ObjectUtils.DeserializeObject(br);
-            Caption = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Id, bw);
-            StringUtil.Serialize(Caption, bw);
-        }
     }
 }

@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(904770772)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(904770772)]
     public class TlBotInlineMessageMediaContact : TlAbsBotInlineMessage
     {
-        public override int Constructor => 904770772;
-
         public int Flags { get; set; }
         public string PhoneNumber { get; set; }
         public string FirstName { get; set; }

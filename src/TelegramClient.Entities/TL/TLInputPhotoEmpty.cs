@@ -2,23 +2,10 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(483901197)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(483901197)]
     public class TlInputPhotoEmpty : TlAbsInputPhoto
     {
-        public override int Constructor => 483901197;
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-        }
     }
 }

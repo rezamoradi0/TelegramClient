@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1662091044)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1662091044)]
     public class TlWallPaperSolid : TlAbsWallPaper
     {
-        public override int Constructor => 1662091044;
-
+        [SerializationOrder(0)]
         public int Id { get; set; }
+
+        [SerializationOrder(1)]
         public string Title { get; set; }
+
+        [SerializationOrder(2)]
         public int BgColor { get; set; }
+
+        [SerializationOrder(3)]
         public int Color { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = br.ReadInt32();
-            Title = StringUtil.Deserialize(br);
-            BgColor = br.ReadInt32();
-            Color = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Id);
-            StringUtil.Serialize(Title, bw);
-            bw.Write(BgColor);
-            bw.Write(Color);
-        }
     }
 }

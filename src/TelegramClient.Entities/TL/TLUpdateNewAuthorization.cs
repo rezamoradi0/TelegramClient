@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-1895411046)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1895411046)]
     public class TlUpdateNewAuthorization : TlAbsUpdate
     {
-        public override int Constructor => -1895411046;
-
+        [SerializationOrder(0)]
         public long AuthKeyId { get; set; }
+
+        [SerializationOrder(1)]
         public int Date { get; set; }
+
+        [SerializationOrder(2)]
         public string Device { get; set; }
+
+        [SerializationOrder(3)]
         public string Location { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            AuthKeyId = br.ReadInt64();
-            Date = br.ReadInt32();
-            Device = StringUtil.Deserialize(br);
-            Location = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(AuthKeyId);
-            bw.Write(Date);
-            StringUtil.Serialize(Device, bw);
-            StringUtil.Serialize(Location, bw);
-        }
     }
 }

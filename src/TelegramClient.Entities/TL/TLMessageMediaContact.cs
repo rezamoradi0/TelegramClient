@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1585262393)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1585262393)]
     public class TlMessageMediaContact : TlAbsMessageMedia
     {
-        public override int Constructor => 1585262393;
-
+        [SerializationOrder(0)]
         public string PhoneNumber { get; set; }
+
+        [SerializationOrder(1)]
         public string FirstName { get; set; }
+
+        [SerializationOrder(2)]
         public string LastName { get; set; }
+
+        [SerializationOrder(3)]
         public int UserId { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            PhoneNumber = StringUtil.Deserialize(br);
-            FirstName = StringUtil.Deserialize(br);
-            LastName = StringUtil.Deserialize(br);
-            UserId = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(PhoneNumber, bw);
-            StringUtil.Serialize(FirstName, bw);
-            StringUtil.Serialize(LastName, bw);
-            bw.Write(UserId);
-        }
     }
 }

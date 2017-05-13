@@ -2,39 +2,24 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(673687578)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(673687578)]
     public class TlInputMediaVenue : TlAbsInputMedia
     {
-        public override int Constructor => 673687578;
-
+        [SerializationOrder(0)]
         public TlAbsInputGeoPoint GeoPoint { get; set; }
+
+        [SerializationOrder(1)]
         public string Title { get; set; }
+
+        [SerializationOrder(2)]
         public string Address { get; set; }
+
+        [SerializationOrder(3)]
         public string Provider { get; set; }
+
+        [SerializationOrder(4)]
         public string VenueId { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            GeoPoint = (TlAbsInputGeoPoint) ObjectUtils.DeserializeObject(br);
-            Title = StringUtil.Deserialize(br);
-            Address = StringUtil.Deserialize(br);
-            Provider = StringUtil.Deserialize(br);
-            VenueId = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(GeoPoint, bw);
-            StringUtil.Serialize(Title, bw);
-            StringUtil.Serialize(Address, bw);
-            StringUtil.Serialize(Provider, bw);
-            StringUtil.Serialize(VenueId, bw);
-        }
     }
 }

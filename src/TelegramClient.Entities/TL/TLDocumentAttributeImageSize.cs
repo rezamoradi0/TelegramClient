@@ -2,30 +2,16 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1815593308)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1815593308)]
     public class TlDocumentAttributeImageSize : TlAbsDocumentAttribute
     {
-        public override int Constructor => 1815593308;
-
+        [SerializationOrder(0)]
         public int W { get; set; }
+
+        [SerializationOrder(1)]
         public int H { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            W = br.ReadInt32();
-            H = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(W);
-            bw.Write(H);
-        }
+        
     }
 }

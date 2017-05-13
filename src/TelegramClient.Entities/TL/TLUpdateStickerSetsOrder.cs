@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(196268545)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(196268545)]
     public class TlUpdateStickerSetsOrder : TlAbsUpdate
     {
-        public override int Constructor => 196268545;
-
         public int Flags { get; set; }
         public bool Masks { get; set; }
         public TlVector<long> Order { get; set; }

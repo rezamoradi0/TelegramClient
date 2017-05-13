@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(634833351)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(634833351)]
     public class TlUpdateReadChannelOutbox : TlAbsUpdate
     {
-        public override int Constructor => 634833351;
-
+        [SerializationOrder(0)]
         public int ChannelId { get; set; }
+
+        [SerializationOrder(1)]
         public int MaxId { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            ChannelId = br.ReadInt32();
-            MaxId = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(ChannelId);
-            bw.Write(MaxId);
-        }
     }
 }

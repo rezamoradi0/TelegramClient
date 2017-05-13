@@ -2,38 +2,24 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Upload
 {
-    [SerializeAttribute(-562337987)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-562337987)]
     public class TlRequestSaveBigFilePart : TlMethod
     {
-        public override int Constructor => -562337987;
-
+        [SerializationOrder(0)]
         public long FileId { get; set; }
+
+        [SerializationOrder(1)]
         public int FilePart { get; set; }
+
+        [SerializationOrder(2)]
         public int FileTotalParts { get; set; }
+
+        [SerializationOrder(3)]
         public byte[] Bytes { get; set; }
+
         public bool Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            FileId = br.ReadInt64();
-            FilePart = br.ReadInt32();
-            FileTotalParts = br.ReadInt32();
-            Bytes = BytesUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(FileId);
-            bw.Write(FilePart);
-            bw.Write(FileTotalParts);
-            BytesUtil.Serialize(Bytes, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

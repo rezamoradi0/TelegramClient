@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(1406570614)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1406570614)]
     public class TlFileLocation : TlAbsFileLocation
     {
-        public override int Constructor => 1406570614;
-
+        [SerializationOrder(0)]
         public int DcId { get; set; }
+
+        [SerializationOrder(1)]
         public long VolumeId { get; set; }
+
+        [SerializationOrder(2)]
         public int LocalId { get; set; }
+
+        [SerializationOrder(3)]
         public long Secret { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            DcId = br.ReadInt32();
-            VolumeId = br.ReadInt64();
-            LocalId = br.ReadInt32();
-            Secret = br.ReadInt64();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(DcId);
-            bw.Write(VolumeId);
-            bw.Write(LocalId);
-            bw.Write(Secret);
-        }
     }
 }

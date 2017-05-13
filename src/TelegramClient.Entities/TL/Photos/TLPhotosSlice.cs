@@ -2,33 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Photos
 {
-    [SerializeAttribute(352657236)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(352657236)]
     public class TlPhotosSlice : TlAbsPhotos
     {
-        public override int Constructor => 352657236;
-
+        [SerializationOrder(0)]
         public int Count { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<TlAbsPhoto> Photos { get; set; }
+
+        [SerializationOrder(2)]
         public TlVector<TlAbsUser> Users { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Count = br.ReadInt32();
-            Photos = ObjectUtils.DeserializeVector<TlAbsPhoto>(br);
-            Users = ObjectUtils.DeserializeVector<TlAbsUser>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Count);
-            ObjectUtils.SerializeObject(Photos, bw);
-            ObjectUtils.SerializeObject(Users, bw);
-        }
     }
 }

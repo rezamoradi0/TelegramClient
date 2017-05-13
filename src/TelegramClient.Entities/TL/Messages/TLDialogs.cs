@@ -2,7 +2,9 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [SerializeAttribute(364538944)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(364538944)]
     public class TlDialogs : TlAbsDialogs
     {
         public override int Constructor => 364538944;

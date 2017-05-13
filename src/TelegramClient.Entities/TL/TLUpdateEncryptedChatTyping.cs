@@ -2,27 +2,12 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(386986326)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(386986326)]
     public class TlUpdateEncryptedChatTyping : TlAbsUpdate
     {
-        public override int Constructor => 386986326;
-
+        [SerializationOrder(0)]
         public int ChatId { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            ChatId = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(ChatId);
-        }
     }
 }

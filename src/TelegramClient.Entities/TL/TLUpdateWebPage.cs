@@ -2,33 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(2139689491)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(2139689491)]
     public class TlUpdateWebPage : TlAbsUpdate
     {
-        public override int Constructor => 2139689491;
-
+        [SerializationOrder(0)]
         public TlAbsWebPage Webpage { get; set; }
+
+        [SerializationOrder(1)]
         public int Pts { get; set; }
+
+        [SerializationOrder(2)]
         public int PtsCount { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Webpage = (TlAbsWebPage) ObjectUtils.DeserializeObject(br);
-            Pts = br.ReadInt32();
-            PtsCount = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Webpage, bw);
-            bw.Write(Pts);
-            bw.Write(PtsCount);
-        }
     }
 }

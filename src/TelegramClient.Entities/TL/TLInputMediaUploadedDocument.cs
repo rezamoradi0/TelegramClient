@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-797904407)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-797904407)]
     public class TlInputMediaUploadedDocument : TlAbsInputMedia
     {
-        public override int Constructor => -797904407;
-
         public int Flags { get; set; }
         public TlAbsInputFile File { get; set; }
         public string MimeType { get; set; }

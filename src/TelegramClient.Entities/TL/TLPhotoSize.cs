@@ -2,39 +2,24 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(2009052699)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(2009052699)]
     public class TlPhotoSize : TlAbsPhotoSize
     {
-        public override int Constructor => 2009052699;
-
+        [SerializationOrder(0)]
         public string Type { get; set; }
+
+        [SerializationOrder(1)]
         public TlAbsFileLocation Location { get; set; }
+
+        [SerializationOrder(2)]
         public int W { get; set; }
+
+        [SerializationOrder(3)]
         public int H { get; set; }
+
+        [SerializationOrder(4)]
         public int Size { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Type = StringUtil.Deserialize(br);
-            Location = (TlAbsFileLocation) ObjectUtils.DeserializeObject(br);
-            W = br.ReadInt32();
-            H = br.ReadInt32();
-            Size = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Type, bw);
-            ObjectUtils.SerializeObject(Location, bw);
-            bw.Write(W);
-            bw.Write(H);
-            bw.Write(Size);
-        }
     }
 }

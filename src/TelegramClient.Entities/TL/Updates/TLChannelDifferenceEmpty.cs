@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Updates
 {
-    [SerializeAttribute(1041346555)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1041346555)]
     public class TlChannelDifferenceEmpty : TlAbsChannelDifference
     {
-        public override int Constructor => 1041346555;
-
         public int Flags { get; set; }
         public bool Final { get; set; }
         public int Pts { get; set; }

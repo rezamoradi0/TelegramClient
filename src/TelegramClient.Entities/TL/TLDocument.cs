@@ -2,51 +2,36 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [SerializeAttribute(-2027738169)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-2027738169)]
     public class TlDocument : TlAbsDocument
     {
-        public override int Constructor => -2027738169;
-
+        [SerializationOrder(0)]
         public long Id { get; set; }
+
+        [SerializationOrder(1)]
         public long AccessHash { get; set; }
+
+        [SerializationOrder(2)]
         public int Date { get; set; }
+
+        [SerializationOrder(3)]
         public string MimeType { get; set; }
+
+        [SerializationOrder(4)]
         public int Size { get; set; }
+    
+        [SerializationOrder(5)]
         public TlAbsPhotoSize Thumb { get; set; }
+
+        [SerializationOrder(6)]
         public int DcId { get; set; }
+
+        [SerializationOrder(7)]
         public int Version { get; set; }
+
+        [SerializationOrder(8)]
         public TlVector<TlAbsDocumentAttribute> Attributes { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = br.ReadInt64();
-            AccessHash = br.ReadInt64();
-            Date = br.ReadInt32();
-            MimeType = StringUtil.Deserialize(br);
-            Size = br.ReadInt32();
-            Thumb = (TlAbsPhotoSize) ObjectUtils.DeserializeObject(br);
-            DcId = br.ReadInt32();
-            Version = br.ReadInt32();
-            Attributes = ObjectUtils.DeserializeVector<TlAbsDocumentAttribute>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Id);
-            bw.Write(AccessHash);
-            bw.Write(Date);
-            StringUtil.Serialize(MimeType, bw);
-            bw.Write(Size);
-            ObjectUtils.SerializeObject(Thumb, bw);
-            bw.Write(DcId);
-            bw.Write(Version);
-            ObjectUtils.SerializeObject(Attributes, bw);
-        }
     }
 }
