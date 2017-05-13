@@ -8,6 +8,6 @@ namespace TelegramClient.Entities
     public class TlVector<T> : TlObject
     {
         [SerializationOrder(0)]
-        public List<T> Collection { get; set; }
+        public List<T> Lists { get; set; }
     }
 }

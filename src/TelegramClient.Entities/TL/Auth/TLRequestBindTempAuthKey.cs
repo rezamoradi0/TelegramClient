@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Auth
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-841733627)]
-    public class TlRequestBindTempAuthKey : TlMethod
+    public class TlRequestBindTempAuthKey : TlMethod<bool>
     {
         [SerializationOrder(0)]
         public long PermAuthKeyId { get; set; }
@@ -18,12 +18,5 @@ namespace TelegramClient.Entities.TL.Auth
 
         [SerializationOrder(3)]
         public byte[] EncryptedMessage { get; set; }
-
-        public bool Response { get; set; }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
-        }
     }
 }

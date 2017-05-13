@@ -19,7 +19,7 @@ namespace TelegramClient.Core
 
         Task ConnectAsync(bool reconnect = false);
 
-        Task<T> SendRequestAsync<T>(TlMethod methodToExecute);
+        Task<TResult> SendRequestAsync<TResult>(TlMethod<TResult> request);
 
         Task<TlAbsUpdates> SendMessageAsync(TlAbsInputPeer peer, string message);
 

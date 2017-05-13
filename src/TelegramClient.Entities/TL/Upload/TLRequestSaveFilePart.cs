@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Upload
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-1291540959)]
-    public class TlRequestSaveFilePart : TlMethod
+    public class TlRequestSaveFilePart : TlMethod<bool>
     {
         [SerializationOrder(0)]
         public long FileId { get; set; }
@@ -15,12 +15,5 @@ namespace TelegramClient.Entities.TL.Upload
 
         [SerializationOrder(2)]
         public byte[] Bytes { get; set; }
-
-        public bool Response { get; set; }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
-        }
     }
 }

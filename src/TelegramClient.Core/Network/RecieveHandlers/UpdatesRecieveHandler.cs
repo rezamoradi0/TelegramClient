@@ -9,7 +9,6 @@
     using TelegramClient.Core.ApiServies;
     using TelegramClient.Core.IoC;
     using TelegramClient.Core.Network.RecieveHandlers.Interfaces;
-    using TelegramClient.Entities;
     using TelegramClient.Entities.TL;
 
     [SingleInstance(typeof(IRecieveHandler))]

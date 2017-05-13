@@ -24,12 +24,13 @@ namespace TelegramClient.Core
         {
             Guard.That(phoneNumber, nameof(phoneNumber)).IsNotNullOrWhiteSpace();
 
-            var authCheckPhoneRequest = new TlRequestCheckPhone { PhoneNumber = phoneNumber };
             var completed = false;
             while (!completed)
-            {    try
+            {
+                TlRequestCheckPhone result;
+                try
                 {
-                    await client.SendRequestAsync<TlRequestCheckPhone>(authCheckPhoneRequest);
+                    result = await client.SendRequestAsync<TlRequestCheckPhone>(new TlRequestCheckPhone { PhoneNumber = phoneNumber });
                     completed = true;
                 }
                 catch (PhoneMigrationException e)
@@ -38,7 +39,7 @@ namespace TelegramClient.Core
                 }
             }
 
-            return authCheckPhoneRequest.Response.PhoneRegistered;
+            return new TlRequestCheckPhone { PhoneNumber = phoneNumber }.Response.PhoneRegistered;
         }
 
         public static async Task<string> SendCodeRequestAsync(this ITelegramClient client, string phoneNumber)
@@ -90,9 +91,7 @@ namespace TelegramClient.Core
         {
             var request = new TlRequestGetPassword();
 
-            await client.SendRequestAsync<TlPassword>(request);
-
-            return (TlPassword)request.Response;
+            return await client.SendRequestAsync<TlPassword>(request);
         }
 
         public static async Task<TlUser> MakeAuthWithPasswordAsync(this ITelegramClient client, TlPassword password, string passwordStr)

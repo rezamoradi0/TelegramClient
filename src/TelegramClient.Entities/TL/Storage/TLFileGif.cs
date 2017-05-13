@@ -7,4 +7,5 @@ namespace TelegramClient.Entities.TL.Storage
     [Serialize(-891180321)]
     public class TlFileGif : TlAbsFileType
     {
+    }
 }

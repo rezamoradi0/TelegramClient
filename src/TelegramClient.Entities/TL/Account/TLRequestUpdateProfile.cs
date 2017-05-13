@@ -5,14 +5,12 @@ namespace TelegramClient.Entities.TL.Account
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(2018596725)]
-    public class TlRequestUpdateProfile : TlMethod
+    public class TlRequestUpdateProfile : TlMethod<TlAbsUser>
     {
         public int Flags { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string About { get; set; }
-        public TlAbsUser Response { get; set; }
-
 
         public void ComputeFlags()
         {
@@ -52,11 +50,6 @@ namespace TelegramClient.Entities.TL.Account
                 StringUtil.Serialize(LastName, bw);
             if ((Flags & 4) != 0)
                 StringUtil.Serialize(About, bw);
-        }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = (TlAbsUser) ObjectUtils.DeserializeObject(br);
         }
     }
 }

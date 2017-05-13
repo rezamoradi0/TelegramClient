@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(1035731989)]
-    public class TlRequestAcceptEncryption : TlMethod
+    public class TlRequestAcceptEncryption : TlMethod<TlAbsEncryptedChat>
     {
         [SerializationOrder(0)]
         public TlInputEncryptedChat Peer { get; set; }
@@ -15,13 +15,5 @@ namespace TelegramClient.Entities.TL.Messages
 
         [SerializationOrder(2)]
         public long KeyFingerprint { get; set; }
-
-        [SerializationOrder(3)]
-        public TlAbsEncryptedChat Response { get; set; }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = (TlAbsEncryptedChat) ObjectUtils.DeserializeObject(br);
-        }
     }
 }

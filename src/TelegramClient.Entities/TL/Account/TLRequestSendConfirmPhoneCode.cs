@@ -6,13 +6,12 @@ namespace TelegramClient.Entities.TL.Account
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(353818557)]
-    public class TlRequestSendConfirmPhoneCode : TlMethod
+    public class TlRequestSendConfirmPhoneCode : TlMethod<TlSentCode>
     {
         public int Flags { get; set; }
         public bool AllowFlashcall { get; set; }
         public string Hash { get; set; }
         public bool? CurrentNumber { get; set; }
-        public TlSentCode Response { get; set; }
 
 
         public void ComputeFlags()
@@ -42,11 +41,6 @@ namespace TelegramClient.Entities.TL.Account
             StringUtil.Serialize(Hash, bw);
             if ((Flags & 1) != 0)
                 BoolUtil.Serialize(CurrentNumber.Value, bw);
-        }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = (TlSentCode) ObjectUtils.DeserializeObject(br);
         }
     }
 }

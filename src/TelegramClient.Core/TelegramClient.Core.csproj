@@ -16,6 +16,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\TelegramClient.Entities\TelegramClient.Entities.csproj" />
+    <ProjectReference Include="..\TelegramClient.Serialization\TelegramClient.Serialization.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac">

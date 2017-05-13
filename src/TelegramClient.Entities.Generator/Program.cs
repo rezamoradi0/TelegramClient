@@ -31,14 +31,13 @@ namespace TelegramClient.Entities.Generator
             var normalStyle = File.ReadAllText("Constructor.tmp");
             var methodStyle = File.ReadAllText("Method.tmp");
             //string method = File.ReadAllText("constructor.tt");
-            var json = "";
-            string url;
-            if (args.Count() == 0) url = "tl-schema.json";
-            else url = args[0];
+            string json;
+            var url = !args.Any()
+                             ? "tl-schema.json"
+                             : args[0];
 
             json = File.ReadAllText(url);
             var file = File.OpenWrite("Result.cs");
-            var sw = new StreamWriter(file);
             var schema = JsonConvert.DeserializeObject<Schema>(json);
             foreach (var c in schema.Constructors)
             {

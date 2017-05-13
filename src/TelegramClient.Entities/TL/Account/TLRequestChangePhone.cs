@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Account
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(1891839707)]
-    public class TlRequestChangePhone : TlMethod
+    public class TlRequestChangePhone : TlMethod<TlAbsUser>
     {
         [SerializationOrder(0)]
         public string PhoneNumber { get; set; }
@@ -15,12 +15,5 @@ namespace TelegramClient.Entities.TL.Account
 
         [SerializationOrder(2)]
         public string PhoneCode { get; set; }
-
-        public TlAbsUser Response { get; set; }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = (TlAbsUser) ObjectUtils.DeserializeObject(br);
-        }
     }
 }

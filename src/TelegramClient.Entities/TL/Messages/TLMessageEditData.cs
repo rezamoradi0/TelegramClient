@@ -7,8 +7,10 @@ namespace TelegramClient.Entities.TL.Messages
     [Serialize(649453030)]
     public class TlMessageEditData : TlObject
     {
+        [SerializationOrder(0)]
         public int Flags { get; set; }
 
+        [SerializationOrder(1)]
         public bool Caption { get; set; }
 
 

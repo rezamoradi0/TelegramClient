@@ -5,8 +5,8 @@
 
     using TelegramClient.Core.MTProto;
     using TelegramClient.Core.MTProto.Crypto;
-    using TelegramClient.Entities;
     using TelegramClient.Entities.TL;
+    using TelegramClient.Serialization;
 
     public class Session : ISession
     {
@@ -125,7 +125,7 @@
                 {
                     writer.Write(1);
                     writer.Write(SessionExpires);
-                    ObjectUtils.SerializeObject(TlUser, writer);
+                    Serializer.Serialize(TlUser, writer);
                 }
                 else
                 {

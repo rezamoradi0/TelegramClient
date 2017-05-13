@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-1347868602)]
-    public class TlRequestGetHistory : TlMethod
+    public class TlRequestGetHistory : TlMethod<TlAbsMessages>
     {
         [SerializationOrder(0)]
         public TlAbsInputPeer Peer { get; set; }
@@ -27,12 +27,5 @@ namespace TelegramClient.Entities.TL.Messages
 
         [SerializationOrder(6)]
         public int MinId { get; set; }
-
-        public TlAbsMessages Response { get; set; }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = (TlAbsMessages) ObjectUtils.DeserializeObject(br);
-        }
     }
 }

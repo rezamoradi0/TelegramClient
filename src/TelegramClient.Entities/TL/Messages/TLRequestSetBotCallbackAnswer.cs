@@ -5,15 +5,13 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-920136629)]
-    public class TlRequestSetBotCallbackAnswer : TlMethod
+    public class TlRequestSetBotCallbackAnswer : TlMethod<bool>
     {
         public int Flags { get; set; }
         public bool Alert { get; set; }
         public long QueryId { get; set; }
         public string Message { get; set; }
         public string Url { get; set; }
-        public bool Response { get; set; }
-
 
         public void ComputeFlags()
         {
@@ -50,11 +48,6 @@ namespace TelegramClient.Entities.TL.Messages
                 StringUtil.Serialize(Message, bw);
             if ((Flags & 4) != 0)
                 StringUtil.Serialize(Url, bw);
-        }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
         }
     }
 }

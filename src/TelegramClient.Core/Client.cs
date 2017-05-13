@@ -111,8 +111,8 @@ namespace TelegramClient.Core
             ConfirmationSendService.StartSendingConfirmation();
             ProtoRecieveService.StartReceiving();
 
-            var response = await SendRequestAsync<TlConfig>(new TlRequestInvokeWithLayer {Layer = 57, Query = request});
-            _dcOptions = response.DcOptions.Collection;
+            var response = await SendRequestAsync(new TlRequestInvokeWithLayer {Layer = 57, Query = request});
+            _dcOptions = response.DcOptions.Lists;
         }
 
         public async Task ReconnectToDcAsync(int dcId)
@@ -128,22 +128,21 @@ namespace TelegramClient.Core
             await ConnectAsync(true);
         }
 
-        public async Task<T> SendRequestAsync<T>(TlMethod methodToExecute)
+        public async Task<TResult> SendRequestAsync<TResult>(TlMethod<TResult> request)
         {
-            Log.Debug($"Send message of the constructor {methodToExecute}");
+            Log.Debug($"Send message of the constructor {request}");
 
             BinaryReader resultReader;
             try
             {
-                resultReader = await SendAndRecieve(methodToExecute);
+                resultReader = await SendAndRecieve(request);
             }
             catch (BadServerSaltException)
             {
-                resultReader = await SendAndRecieve(methodToExecute);
+                resultReader = await SendAndRecieve(request);
             }
-            methodToExecute.DeserializeResponse(resultReader);
-
-            return (T)methodToExecute.GetType().GetProperty("Response").GetValue(methodToExecute);
+            ;
+            return request.DeserializeResponse(resultReader);
         }
 
         private async Task<BinaryReader> SendAndRecieve(TlMethod methodToExecute)

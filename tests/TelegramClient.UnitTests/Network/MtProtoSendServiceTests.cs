@@ -16,6 +16,7 @@
     using TelegramClient.Core.Settings;
     using TelegramClient.Core.Utils;
     using TelegramClient.Entities;
+    using TelegramClient.Serialization;
     using TelegramClient.UnitTests.Framework;
 
     using Xunit;
@@ -104,7 +105,7 @@
                                 var packetLength = reader.ReadInt32();
                                 Assert.True(packetLength > 0);
 
-                                var requestBytes = BinaryHelper.WriteBytes(request.SerializeBody);
+                                var requestBytes = Serializer.Serialize(request).ToArray();
                                 Assert.Equal(requestBytes, reader.ReadBytes(packetLength));
                             });
                     });

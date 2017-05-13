@@ -5,15 +5,18 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(319564933)]
-    public class TlRequestEditInlineBotMessage : TlMethod
+    public class TlRequestEditInlineBotMessage : TlMethod<bool>
     {
+        [SerializationOrder(0)]
         public int Flags { get; set; }
-        public bool NoWebpage { get; set; }
+
+        [SerializationOrder(1)]
         public TlInputBotInlineMessageId Id { get; set; }
+
+        public bool NoWebpage { get; set; }
         public string Message { get; set; }
         public TlAbsReplyMarkup ReplyMarkup { get; set; }
         public TlVector<TlAbsMessageEntity> Entities { get; set; }
-        public bool Response { get; set; }
 
 
         public void ComputeFlags()
@@ -59,11 +62,6 @@ namespace TelegramClient.Entities.TL.Messages
                 ObjectUtils.SerializeObject(ReplyMarkup, bw);
             if ((Flags & 8) != 0)
                 ObjectUtils.SerializeObject(Entities, bw);
-        }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
         }
     }
 }

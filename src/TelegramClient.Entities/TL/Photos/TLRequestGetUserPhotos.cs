@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Photos
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-1848823128)]
-    public class TlRequestGetUserPhotos : TlMethod
+    public class TlRequestGetUserPhotos : TlMethod<TlAbsPhotos>
     {
         [SerializationOrder(0)]
         public TlAbsInputUser UserId { get; set; }
@@ -18,12 +18,5 @@ namespace TelegramClient.Entities.TL.Photos
 
         [SerializationOrder(3)]
         public int Limit { get; set; }
-
-        public TlAbsPhotos Response { get; set; }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = (TlAbsPhotos) ObjectUtils.DeserializeObject(br);
-        }
     }
 }

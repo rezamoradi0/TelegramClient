@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-106911223)]
-    public class TlRequestAddChatUser : TlMethod
+    public class TlRequestAddChatUser : TlMethod<TlAbsUpdates>
     {
         [SerializationOrder(0)]
         public int ChatId { get; set; }
@@ -15,12 +15,5 @@ namespace TelegramClient.Entities.TL.Messages
 
         [SerializationOrder(2)]
         public int FwdLimit { get; set; }
-
-        public TlAbsUpdates Response { get; set; }
-        
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = (TlAbsUpdates) ObjectUtils.DeserializeObject(br);
-        }
     }
 }

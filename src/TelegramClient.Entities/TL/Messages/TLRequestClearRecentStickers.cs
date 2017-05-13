@@ -5,35 +5,15 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-1986437075)]
-    public class TlRequestClearRecentStickers : TlMethod
+    public class TlRequestClearRecentStickers : TlMethod<bool>
     {
+        [SerializationOrder(0)]
         public int Flags { get; set; }
-        public bool Attached { get; set; }
-        public bool Response { get; set; }
 
-
-        public void ComputeFlags()
+        public bool Attached
         {
-            Flags = 0;
-            Flags = Attached ? Flags | 1 : Flags & ~1;
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Flags = br.ReadInt32();
-            Attached = (Flags & 1) != 0;
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ComputeFlags();
-            bw.Write(Flags);
-        }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
+            get => (Flags & 1) != 0;
+            set => Flags = value ? 0 | 1 : 0 & ~1;
         }
     }
 }

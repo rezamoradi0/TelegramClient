@@ -18,8 +18,9 @@ namespace TelegramClient.Core.Network
     using TelegramClient.Core.Network.Tcp;
 	using TelegramClient.Core.Sessions;
 	using TelegramClient.Core.Settings;
+	using TelegramClient.Serialization;
 
-	[SingleInstance(typeof(IMtProtoSender))]
+    [SingleInstance(typeof(IMtProtoSender))]
     internal class MtProtoSendService : IMtProtoSender
 	{
         private static readonly ILog Log = LogManager.GetLogger(typeof(MtProtoSendService));
@@ -34,7 +35,7 @@ namespace TelegramClient.Core.Network
 
 	    private byte[] PrepareToSend(TlMethod request, out ulong mesId)
 	    {
-		    var packet = BinaryHelper.WriteBytes(request.SerializeBody);
+		    var packet = Serializer.Serialize(request).ToArray();
 
 		    var genResult = ClientSettings.Session.GenerateMsgIdAndSeqNo(request.Confirmed);
 		    mesId = genResult.Item1;

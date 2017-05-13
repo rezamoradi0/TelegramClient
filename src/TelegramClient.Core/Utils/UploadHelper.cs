@@ -90,7 +90,7 @@ namespace TelegramClient.Core.Utils
                 var part = fileParts.Dequeue();
 
                 if (isBigFileUpload)
-                    await client.SendRequestAsync<bool>(new TlRequestSaveBigFilePart
+                    await client.SendRequestAsync(new TlRequestSaveBigFilePart
                     {
                         FileId = fileId,
                         FilePart = partNumber,

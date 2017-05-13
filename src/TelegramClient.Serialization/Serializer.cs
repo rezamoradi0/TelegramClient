@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Reflection;
@@ -21,7 +20,7 @@
             return stream;
         }
 
-        private static void Serialize(object obj, BinaryWriter binaryWriter)
+        public static void Serialize(object obj, BinaryWriter binaryWriter)
         {
             var objectType = obj.GetType().GetTypeInfo();
 

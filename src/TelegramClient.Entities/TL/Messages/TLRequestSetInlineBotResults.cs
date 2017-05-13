@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-346119674)]
-    public class TlRequestSetInlineBotResults : TlMethod
+    public class TlRequestSetInlineBotResults : TlMethod<bool>
     {
         public int Flags { get; set; }
         public bool Gallery { get; set; }
@@ -15,8 +15,6 @@ namespace TelegramClient.Entities.TL.Messages
         public int CacheTime { get; set; }
         public string NextOffset { get; set; }
         public TlInlineBotSwitchPm SwitchPm { get; set; }
-        public bool Response { get; set; }
-
 
         public void ComputeFlags()
         {
@@ -60,11 +58,6 @@ namespace TelegramClient.Entities.TL.Messages
                 StringUtil.Serialize(NextOffset, bw);
             if ((Flags & 8) != 0)
                 ObjectUtils.SerializeObject(SwitchPm, bw);
-        }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
         }
     }
 }

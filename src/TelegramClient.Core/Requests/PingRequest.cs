@@ -5,26 +5,12 @@ using TelegramClient.Entities;
 
 namespace TelegramClient.Core.Requests
 {
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(0x7abe77ec)]
     public class PingRequest : TlMethod
     {
-        private readonly long _random  = TlHelpers.GenerateRandomLong();
-
-        public override int Constructor => 0x7abe77ec;
-
-        public override void SerializeBody(BinaryWriter writer)
-        {
-            writer.Write(Constructor);
-            writer.Write(_random);
-        }
-
-        public override void DeserializeBody(BinaryReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void DeserializeResponse(BinaryReader stream)
-        {
-            throw new NotImplementedException();
-        }
+        [SerializationOrder(0)]
+        public long Random { get; set; } = TlHelpers.GenerateRandomLong();
     }
 }

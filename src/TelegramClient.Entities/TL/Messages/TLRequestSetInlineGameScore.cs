@@ -5,14 +5,13 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(363700068)]
-    public class TlRequestSetInlineGameScore : TlMethod
+    public class TlRequestSetInlineGameScore : TlMethod<bool>
     {
         public int Flags { get; set; }
         public bool EditMessage { get; set; }
         public TlInputBotInlineMessageId Id { get; set; }
         public TlAbsInputUser UserId { get; set; }
         public int Score { get; set; }
-        public bool Response { get; set; }
 
 
         public void ComputeFlags()
@@ -39,11 +38,6 @@ namespace TelegramClient.Entities.TL.Messages
             ObjectUtils.SerializeObject(Id, bw);
             ObjectUtils.SerializeObject(UserId, bw);
             bw.Write(Score);
-        }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
         }
     }
 }

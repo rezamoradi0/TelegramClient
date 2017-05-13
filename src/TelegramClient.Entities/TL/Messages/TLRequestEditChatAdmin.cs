@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-1444503762)]
-    public class TlRequestEditChatAdmin : TlMethod
+    public class TlRequestEditChatAdmin : TlMethod<bool>
     {
         [SerializationOrder(0)]
         public int ChatId { get; set; }
@@ -15,12 +15,5 @@ namespace TelegramClient.Entities.TL.Messages
 
         [SerializationOrder(2)]
         public bool IsAdmin { get; set; }
-
-        public bool Response { get; set; }
-        
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
-        }
     }
 }

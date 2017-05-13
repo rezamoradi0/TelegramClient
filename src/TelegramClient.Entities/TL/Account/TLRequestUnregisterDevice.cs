@@ -5,19 +5,12 @@ namespace TelegramClient.Entities.TL.Account
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(1707432768)]
-    public class TlRequestUnregisterDevice : TlMethod
+    public class TlRequestUnregisterDevice : TlMethod<bool>
     {
         [SerializationOrder(0)]
         public int TokenType { get; set; }
 
-        [SerializationOrder(0)]
+        [SerializationOrder(1)]
         public string Token { get; set; }
-
-        public bool Response { get; set; }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = BoolUtil.Deserialize(br);
-        }
     }
 }

@@ -3,21 +3,23 @@
     using System.IO;
 
     using TelegramClient.Entities;
+    using TelegramClient.Serialization.Attributes;
 
-    public class RpcResponce: BaseResponce
-    {
-        private readonly TlObject _rpcResult;
+    //[Serialize(0xf35c6d01)]
+    //public class RpcResponce: BaseResponce
+    //{
+    //    private readonly TlObject _rpcResult;
 
-        public override uint Constructor { get; } = 0xf35c6d01;
+    //    public override uint Constructor { get; } = 0xf35c6d01;
 
-        public RpcResponce(ulong requestMessageId, TlObject rpcResult) : base(requestMessageId)
-        {
-            _rpcResult = rpcResult;
-        }
+    //    public RpcResponce(ulong requestMessageId, TlObject rpcResult) : base(requestMessageId)
+    //    {
+    //        _rpcResult = rpcResult;
+    //    }
 
-        public override void SerializeBody(BinaryWriter writer)
-        {
-            writer.Write(_rpcResult.Serialize());
-        }
-    }
+    //    public override void SerializeBody(BinaryWriter writer)
+    //    {
+    //        writer.Write(_rpcResult.Serialize());
+    //    }
+    //}
 }

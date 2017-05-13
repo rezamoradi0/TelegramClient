@@ -5,7 +5,7 @@ namespace TelegramClient.Entities.TL.Messages
     using TelegramClient.Serialization.Attributes;
 
     [Serialize(-91733382)]
-    public class TlRequestSendMessage : TlMethod
+    public class TlRequestSendMessage : TlMethod<TlAbsUpdates>
     {
         public int Flags { get; set; }
         public bool NoWebpage { get; set; }
@@ -18,7 +18,6 @@ namespace TelegramClient.Entities.TL.Messages
         public long RandomId { get; set; }
         public TlAbsReplyMarkup ReplyMarkup { get; set; }
         public TlVector<TlAbsMessageEntity> Entities { get; set; }
-        public TlAbsUpdates Response { get; set; }
 
 
         public void ComputeFlags()
@@ -75,11 +74,6 @@ namespace TelegramClient.Entities.TL.Messages
                 ObjectUtils.SerializeObject(ReplyMarkup, bw);
             if ((Flags & 8) != 0)
                 ObjectUtils.SerializeObject(Entities, bw);
-        }
-
-        public override void DeserializeResponse(BinaryReader br)
-        {
-            Response = (TlAbsUpdates) ObjectUtils.DeserializeObject(br);
         }
     }
 }
