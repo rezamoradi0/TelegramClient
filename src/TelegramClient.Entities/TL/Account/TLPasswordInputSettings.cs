@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Account
 {
-    [TlObject(-2037289493)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-2037289493)]
     public class TlPasswordInputSettings : TlObject
     {
-        public override int Constructor => -2037289493;
-
         public int Flags { get; set; }
         public byte[] NewSalt { get; set; }
         public byte[] NewPasswordHash { get; set; }

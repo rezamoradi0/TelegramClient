@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Contacts
 {
-    [TlObject(-728224331)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-728224331)]
     public class TlRequestGetTopPeers : TlMethod
     {
-        public override int Constructor => -728224331;
-
         public int Flags { get; set; }
         public bool Correspondents { get; set; }
         public bool BotsPm { get; set; }

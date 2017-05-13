@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Storage
 {
-    [TlObject(172975040)]
+    [SerializeAttribute(172975040)]
     public class TlFilePng : TlAbsFileType
     {
         public override int Constructor => 172975040;

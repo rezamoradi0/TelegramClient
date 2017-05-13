@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-920136629)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-920136629)]
     public class TlRequestSetBotCallbackAnswer : TlMethod
     {
-        public override int Constructor => -920136629;
-
         public int Flags { get; set; }
         public bool Alert { get; set; }
         public long QueryId { get; set; }

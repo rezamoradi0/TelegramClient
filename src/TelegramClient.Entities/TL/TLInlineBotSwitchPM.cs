@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1008755359)]
+    [SerializeAttribute(1008755359)]
     public class TlInlineBotSwitchPm : TlObject
     {
         public override int Constructor => 1008755359;

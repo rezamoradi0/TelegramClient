@@ -2,38 +2,24 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-1701831834)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1701831834)]
     public class TlRequestSendEncryptedFile : TlMethod
     {
-        public override int Constructor => -1701831834;
-
+        [SerializationOrder(0)]
         public TlInputEncryptedChat Peer { get; set; }
+
+        [SerializationOrder(1)]
         public long RandomId { get; set; }
+
+        [SerializationOrder(2)]
         public byte[] Data { get; set; }
+
+        [SerializationOrder(3)]
         public TlAbsInputEncryptedFile File { get; set; }
+
         public TlAbsSentEncryptedMessage Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Peer = (TlInputEncryptedChat) ObjectUtils.DeserializeObject(br);
-            RandomId = br.ReadInt64();
-            Data = BytesUtil.Deserialize(br);
-            File = (TlAbsInputEncryptedFile) ObjectUtils.DeserializeObject(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Peer, bw);
-            bw.Write(RandomId);
-            BytesUtil.Serialize(Data, bw);
-            ObjectUtils.SerializeObject(File, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

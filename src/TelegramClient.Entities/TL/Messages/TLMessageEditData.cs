@@ -2,12 +2,13 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(649453030)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(649453030)]
     public class TlMessageEditData : TlObject
     {
-        public override int Constructor => 649453030;
-
         public int Flags { get; set; }
+
         public bool Caption { get; set; }
 
 

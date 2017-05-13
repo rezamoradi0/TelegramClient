@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TelegramClient.Serialization\TelegramClient.Serialization.csproj">
+      <Project>{cd982596-b9eb-43e3-b382-2a2a98f22620}</Project>
+      <Name>TelegramClient.Serialization</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

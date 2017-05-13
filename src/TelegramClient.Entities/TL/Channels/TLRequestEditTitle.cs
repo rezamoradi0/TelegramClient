@@ -2,32 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Channels
 {
-    [TlObject(1450044624)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1450044624)]
     public class TlRequestEditTitle : TlMethod
     {
-        public override int Constructor => 1450044624;
-
+        [SerializationOrder(0)]
         public TlAbsInputChannel Channel { get; set; }
+
+        [SerializationOrder(1)]
         public string Title { get; set; }
+
         public TlAbsUpdates Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Channel = (TlAbsInputChannel) ObjectUtils.DeserializeObject(br);
-            Title = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Channel, bw);
-            StringUtil.Serialize(Title, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

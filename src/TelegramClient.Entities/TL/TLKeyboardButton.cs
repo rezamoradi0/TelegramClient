@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-1560655744)]
+    [SerializeAttribute(-1560655744)]
     public class TlKeyboardButton : TlAbsKeyboardButton
     {
         public override int Constructor => -1560655744;

@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-2131957734)]
+    [SerializeAttribute(-2131957734)]
     public class TlUpdateUserBlocked : TlAbsUpdate
     {
         public override int Constructor => -2131957734;

@@ -3,7 +3,7 @@ using TelegramClient.Entities.TL.Storage;
 
 namespace TelegramClient.Entities.TL.Upload
 {
-    [TlObject(157948117)]
+    [SerializeAttribute(157948117)]
     public class TlFile : TlObject
     {
         public override int Constructor => 157948117;

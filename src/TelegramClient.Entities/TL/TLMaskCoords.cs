@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-1361650766)]
+    [SerializeAttribute(-1361650766)]
     public class TlMaskCoords : TlObject
     {
         public override int Constructor => -1361650766;

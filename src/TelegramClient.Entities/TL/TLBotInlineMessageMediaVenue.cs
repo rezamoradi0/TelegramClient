@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1130767150)]
+    [SerializeAttribute(1130767150)]
     public class TlBotInlineMessageMediaVenue : TlAbsBotInlineMessage
     {
         public override int Constructor => 1130767150;

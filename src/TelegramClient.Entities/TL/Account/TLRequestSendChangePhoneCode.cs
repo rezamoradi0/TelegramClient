@@ -3,11 +3,11 @@ using TelegramClient.Entities.TL.Auth;
 
 namespace TelegramClient.Entities.TL.Account
 {
-    [TlObject(149257707)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(149257707)]
     public class TlRequestSendChangePhoneCode : TlMethod
     {
-        public override int Constructor => 149257707;
-
         public int Flags { get; set; }
         public bool AllowFlashcall { get; set; }
         public string PhoneNumber { get; set; }

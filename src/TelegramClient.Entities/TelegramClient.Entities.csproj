@@ -22,4 +22,7 @@
       <Version>4.3.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TelegramClient.Serialization\TelegramClient.Serialization.csproj" />
+  </ItemGroup>
 </Project>

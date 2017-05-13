@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Account
 {
-    [TlObject(2018596725)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(2018596725)]
     public class TlRequestUpdateProfile : TlMethod
     {
-        public override int Constructor => 2018596725;
-
         public int Flags { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

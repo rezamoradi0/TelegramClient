@@ -2,32 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(846868683)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(846868683)]
     public class TlRequestSaveGif : TlMethod
     {
-        public override int Constructor => 846868683;
-
+        [SerializationOrder(0)]
         public TlAbsInputDocument Id { get; set; }
+
+        [SerializationOrder(1)]
         public bool Unsave { get; set; }
+
         public bool Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Id = (TlAbsInputDocument) ObjectUtils.DeserializeObject(br);
-            Unsave = BoolUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Id, bw);
-            BoolUtil.Serialize(Unsave, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

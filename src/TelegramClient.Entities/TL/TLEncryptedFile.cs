@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1248893260)]
+    [SerializeAttribute(1248893260)]
     public class TlEncryptedFile : TlAbsEncryptedFile
     {
         public override int Constructor => 1248893260;

@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-1645763991)]
+    [SerializeAttribute(-1645763991)]
     public class TlInputStickerSetId : TlAbsInputStickerSet
     {
         public override int Constructor => -1645763991;

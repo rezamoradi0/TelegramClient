@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-182231723)]
+    [SerializeAttribute(-182231723)]
     public class TlInputEncryptedFileLocation : TlAbsInputFileLocation
     {
         public override int Constructor => -182231723;

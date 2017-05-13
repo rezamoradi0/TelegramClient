@@ -2,36 +2,23 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-993483427)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-993483427)]
     public class TlRequestGetMessagesViews : TlMethod
     {
-        public override int Constructor => -993483427;
-
+        [SerializationOrder(0)]
         public TlAbsInputPeer Peer { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<int> Id { get; set; }
+
+        [SerializationOrder(2)]
         public bool Increment { get; set; }
+
+        [SerializationOrder(3)]
         public TlVector<int> Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Peer = (TlAbsInputPeer) ObjectUtils.DeserializeObject(br);
-            Id = ObjectUtils.DeserializeVector<int>(br);
-            Increment = BoolUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Peer, bw);
-            ObjectUtils.SerializeObject(Id, bw);
-            BoolUtil.Serialize(Increment, bw);
-        }
-
+        
         public override void DeserializeResponse(BinaryReader br)
         {
             Response = ObjectUtils.DeserializeVector<int>(br);

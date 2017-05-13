@@ -1,6 +1,6 @@
 namespace TelegramClient.Entities.TL.Account
 {
-    public abstract class TlAbsPassword : TlObject
+    public abstract class TlAbsPassword:TlObject
     {
     }
 }

@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(1475442322)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1475442322)]
     public class TlRequestGetArchivedStickers : TlMethod
     {
-        public override int Constructor => 1475442322;
-
         public int Flags { get; set; }
         public bool Masks { get; set; }
         public long OffsetId { get; set; }

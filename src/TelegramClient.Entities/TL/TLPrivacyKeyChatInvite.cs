@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1343122938)]
+    [SerializeAttribute(1343122938)]
     public class TlPrivacyKeyChatInvite : TlAbsPrivacyKey
     {
         public override int Constructor => 1343122938;

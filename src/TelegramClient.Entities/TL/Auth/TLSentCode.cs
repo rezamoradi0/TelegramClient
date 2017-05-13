@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Auth
 {
-    [TlObject(1577067778)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1577067778)]
     public class TlSentCode : TlObject
     {
-        public override int Constructor => 1577067778;
-
         public int Flags { get; set; }
         public bool PhoneRegistered { get; set; }
         public TlAbsSentCodeType Type { get; set; }

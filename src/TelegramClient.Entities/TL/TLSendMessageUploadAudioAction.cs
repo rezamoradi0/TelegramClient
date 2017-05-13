@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-212740181)]
+    [SerializeAttribute(-212740181)]
     public class TlSendMessageUploadAudioAction : TlAbsSendMessageAction
     {
         public override int Constructor => -212740181;

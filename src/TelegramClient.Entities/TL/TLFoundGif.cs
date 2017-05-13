@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(372165663)]
+    [SerializeAttribute(372165663)]
     public class TlFoundGif : TlAbsFoundGif
     {
         public override int Constructor => 372165663;

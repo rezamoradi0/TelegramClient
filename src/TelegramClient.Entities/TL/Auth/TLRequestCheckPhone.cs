@@ -2,12 +2,16 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Auth
 {
-    [TlObject(1877286395)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1877286395)]
     public class TlRequestCheckPhone : TlMethod
     {
         public override int Constructor => 1877286395;
 
+        [SerializationOrder(0)]
         public string PhoneNumber { get; set; }
+
         public TlCheckedPhone Response { get; set; }
 
 

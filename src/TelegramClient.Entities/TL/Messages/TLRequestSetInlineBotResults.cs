@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-346119674)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-346119674)]
     public class TlRequestSetInlineBotResults : TlMethod
     {
-        public override int Constructor => -346119674;
-
         public int Flags { get; set; }
         public bool Gallery { get; set; }
         public bool Private { get; set; }

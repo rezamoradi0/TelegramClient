@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(524838915)]
+    [SerializeAttribute(524838915)]
     public class TlExportedMessageLink : TlObject
     {
         public override int Constructor => 524838915;

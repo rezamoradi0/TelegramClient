@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-1910892683)]
+    [SerializeAttribute(-1910892683)]
     public class TlNearestDc : TlObject
     {
         public override int Constructor => -1910892683;

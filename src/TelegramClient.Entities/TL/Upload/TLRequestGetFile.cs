@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Upload
 {
-    [TlObject(-475607115)]
+    [SerializeAttribute(-475607115)]
     public class TlRequestGetFile : TlMethod
     {
         public override int Constructor => -475607115;

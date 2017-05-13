@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1698855810)]
+    [SerializeAttribute(1698855810)]
     public class TlPrivacyValueAllowAll : TlAbsPrivacyRule
     {
         public override int Constructor => 1698855810;

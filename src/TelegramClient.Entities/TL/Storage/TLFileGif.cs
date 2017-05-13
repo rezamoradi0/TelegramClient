@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Storage
 {
-    [TlObject(-891180321)]
+    [SerializeAttribute(-891180321)]
     public class TlFileGif : TlAbsFileType
     {
         public override int Constructor => -891180321;

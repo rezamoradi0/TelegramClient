@@ -2,36 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(189033187)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(189033187)]
     public class TlMessagesSlice : TlAbsMessages
     {
-        public override int Constructor => 189033187;
-
+        [SerializationOrder(0)]
         public int Count { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<TlAbsMessage> Messages { get; set; }
+
+        [SerializationOrder(2)]
         public TlVector<TlAbsChat> Chats { get; set; }
+
+        [SerializationOrder(3)]
         public TlVector<TlAbsUser> Users { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Count = br.ReadInt32();
-            Messages = ObjectUtils.DeserializeVector<TlAbsMessage>(br);
-            Chats = ObjectUtils.DeserializeVector<TlAbsChat>(br);
-            Users = ObjectUtils.DeserializeVector<TlAbsUser>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(Count);
-            ObjectUtils.SerializeObject(Messages, bw);
-            ObjectUtils.SerializeObject(Chats, bw);
-            ObjectUtils.SerializeObject(Users, bw);
-        }
     }
 }

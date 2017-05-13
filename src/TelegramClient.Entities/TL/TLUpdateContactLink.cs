@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-1657903163)]
+    [SerializeAttribute(-1657903163)]
     public class TlUpdateContactLink : TlAbsUpdate
     {
         public override int Constructor => -1657903163;

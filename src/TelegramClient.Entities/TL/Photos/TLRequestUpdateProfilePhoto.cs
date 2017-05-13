@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Photos
 {
-    [TlObject(-256159406)]
+    [SerializeAttribute(-256159406)]
     public class TlRequestUpdateProfilePhoto : TlMethod
     {
         public override int Constructor => -256159406;

@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Channels
 {
-    [TlObject(-1490162350)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1490162350)]
     public class TlRequestUpdatePinnedMessage : TlMethod
     {
-        public override int Constructor => -1490162350;
-
         public int Flags { get; set; }
         public bool Silent { get; set; }
         public TlAbsInputChannel Channel { get; set; }

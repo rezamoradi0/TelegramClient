@@ -3,7 +3,7 @@ using TelegramClient.Entities.TL.Contacts;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1496513539)]
+    [SerializeAttribute(1496513539)]
     public class TlUserFull : TlObject
     {
         public override int Constructor => 1496513539;

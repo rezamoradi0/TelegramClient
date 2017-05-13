@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Updates
 {
-    [TlObject(-1154295872)]
+    [SerializeAttribute(-1154295872)]
     public class TlRequestGetChannelDifference : TlMethod
     {
         public override int Constructor => -1154295872;

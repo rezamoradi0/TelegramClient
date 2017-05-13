@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-1328445861)]
+    [SerializeAttribute(-1328445861)]
     public class TlChannelParticipantsBots : TlAbsChannelParticipantsFilter
     {
         public override int Constructor => -1328445861;

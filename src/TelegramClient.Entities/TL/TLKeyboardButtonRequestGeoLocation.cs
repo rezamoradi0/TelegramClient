@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-59151553)]
+    [SerializeAttribute(-59151553)]
     public class TlKeyboardButtonRequestGeoLocation : TlAbsKeyboardButton
     {
         public override int Constructor => -59151553;

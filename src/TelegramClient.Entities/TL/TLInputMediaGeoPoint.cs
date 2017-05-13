@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-104578748)]
+    [SerializeAttribute(-104578748)]
     public class TlInputMediaGeoPoint : TlAbsInputMedia
     {
         public override int Constructor => -104578748;

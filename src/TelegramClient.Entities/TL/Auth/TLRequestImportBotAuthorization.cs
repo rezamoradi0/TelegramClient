@@ -2,15 +2,19 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Auth
 {
-    [TlObject(1738800940)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1738800940)]
     public class TlRequestImportBotAuthorization : TlMethod
     {
-        public override int Constructor => 1738800940;
-
         public int Flags { get; set; }
+
         public int ApiId { get; set; }
+
         public string ApiHash { get; set; }
+
         public string BotAuthToken { get; set; }
+
         public TlAuthorization Response { get; set; }
 
 

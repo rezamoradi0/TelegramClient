@@ -2,41 +2,27 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-1640190800)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1640190800)]
     public class TlRequestSearchGlobal : TlMethod
     {
-        public override int Constructor => -1640190800;
-
+        [SerializationOrder(0)]
         public string Q { get; set; }
+
+        [SerializationOrder(1)]
         public int OffsetDate { get; set; }
+
+        [SerializationOrder(2)]
         public TlAbsInputPeer OffsetPeer { get; set; }
+
+        [SerializationOrder(3)]
         public int OffsetId { get; set; }
+
+        [SerializationOrder(4)]
         public int Limit { get; set; }
+
         public TlAbsMessages Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Q = StringUtil.Deserialize(br);
-            OffsetDate = br.ReadInt32();
-            OffsetPeer = (TlAbsInputPeer) ObjectUtils.DeserializeObject(br);
-            OffsetId = br.ReadInt32();
-            Limit = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(Q, bw);
-            bw.Write(OffsetDate);
-            ObjectUtils.SerializeObject(OffsetPeer, bw);
-            bw.Write(OffsetId);
-            bw.Write(Limit);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

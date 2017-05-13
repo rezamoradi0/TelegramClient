@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1692693954)]
+    [SerializeAttribute(1692693954)]
     public class TlMessageEntityEmail : TlAbsMessageEntity
     {
         public override int Constructor => 1692693954;

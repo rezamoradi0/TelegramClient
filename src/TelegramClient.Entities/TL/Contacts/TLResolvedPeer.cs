@@ -2,33 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Contacts
 {
-    [TlObject(2131196633)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(2131196633)]
     public class TlResolvedPeer : TlObject
     {
-        public override int Constructor => 2131196633;
-
+        [SerializationOrder(0)]
         public TlAbsPeer Peer { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<TlAbsChat> Chats { get; set; }
+
+        [SerializationOrder(2)]
         public TlVector<TlAbsUser> Users { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Peer = (TlAbsPeer) ObjectUtils.DeserializeObject(br);
-            Chats = ObjectUtils.DeserializeVector<TlAbsChat>(br);
-            Users = ObjectUtils.DeserializeVector<TlAbsUser>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Peer, bw);
-            ObjectUtils.SerializeObject(Chats, bw);
-            ObjectUtils.SerializeObject(Users, bw);
-        }
     }
 }

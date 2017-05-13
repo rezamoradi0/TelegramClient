@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-1606526075)]
+    [SerializeAttribute(-1606526075)]
     public class TlReplyKeyboardHide : TlAbsReplyMarkup
     {
         public override int Constructor => -1606526075;

@@ -2,35 +2,22 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(1035731989)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1035731989)]
     public class TlRequestAcceptEncryption : TlMethod
     {
-        public override int Constructor => 1035731989;
-
+        [SerializationOrder(0)]
         public TlInputEncryptedChat Peer { get; set; }
+
+        [SerializationOrder(1)]
         public byte[] GB { get; set; }
+
+        [SerializationOrder(2)]
         public long KeyFingerprint { get; set; }
+
+        [SerializationOrder(3)]
         public TlAbsEncryptedChat Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Peer = (TlInputEncryptedChat) ObjectUtils.DeserializeObject(br);
-            GB = BytesUtil.Deserialize(br);
-            KeyFingerprint = br.ReadInt64();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Peer, bw);
-            BytesUtil.Serialize(GB, bw);
-            bw.Write(KeyFingerprint);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

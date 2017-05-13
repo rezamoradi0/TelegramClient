@@ -2,35 +2,21 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-162681021)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-162681021)]
     public class TlRequestRequestEncryption : TlMethod
     {
-        public override int Constructor => -162681021;
-
+        [SerializationOrder(0)]
         public TlAbsInputUser UserId { get; set; }
+
+        [SerializationOrder(1)]
         public int RandomId { get; set; }
+
+        [SerializationOrder(2)]
         public byte[] GA { get; set; }
+
         public TlAbsEncryptedChat Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            UserId = (TlAbsInputUser) ObjectUtils.DeserializeObject(br);
-            RandomId = br.ReadInt32();
-            GA = BytesUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(UserId, bw);
-            bw.Write(RandomId);
-            BytesUtil.Serialize(GA, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

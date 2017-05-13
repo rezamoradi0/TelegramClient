@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Updates
 {
-    [TlObject(-1459938943)]
+    [SerializeAttribute(-1459938943)]
     public class TlDifferenceSlice : TlAbsDifference
     {
         public override int Constructor => -1459938943;

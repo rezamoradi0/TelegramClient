@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(393186209)]
+    [SerializeAttribute(393186209)]
     public class TlSendMessageGeoLocationAction : TlAbsSendMessageAction
     {
         public override int Constructor => 393186209;

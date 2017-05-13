@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Auth
 {
-    [TlObject(-855308010)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-855308010)]
     public class TlAuthorization : TlObject
     {
-        public override int Constructor => -855308010;
-
         public int Flags { get; set; }
         public int? TmpSessions { get; set; }
         public TlAbsUser User { get; set; }

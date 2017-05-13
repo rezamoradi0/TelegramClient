@@ -2,32 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Account
 {
-    [TlObject(1596029123)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1596029123)]
     public class TlRequestConfirmPhone : TlMethod
     {
-        public override int Constructor => 1596029123;
-
+        [SerializationOrder(0)]
         public string PhoneCodeHash { get; set; }
+
+        [SerializationOrder(1)]
         public string PhoneCode { get; set; }
+
         public bool Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            PhoneCodeHash = StringUtil.Deserialize(br);
-            PhoneCode = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            StringUtil.Serialize(PhoneCodeHash, bw);
-            StringUtil.Serialize(PhoneCode, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

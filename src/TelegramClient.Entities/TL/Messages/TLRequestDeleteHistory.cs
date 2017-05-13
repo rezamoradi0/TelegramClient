@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(469850889)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(469850889)]
     public class TlRequestDeleteHistory : TlMethod
     {
-        public override int Constructor => 469850889;
-
         public int Flags { get; set; }
         public bool JustClear { get; set; }
         public TlAbsInputPeer Peer { get; set; }

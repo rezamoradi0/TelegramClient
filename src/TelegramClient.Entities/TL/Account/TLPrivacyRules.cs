@@ -2,30 +2,15 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Account
 {
-    [TlObject(1430961007)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(1430961007)]
     public class TlPrivacyRules : TlObject
     {
-        public override int Constructor => 1430961007;
-
+        [SerializationOrder(0)]
         public TlVector<TlAbsPrivacyRule> Rules { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<TlAbsUser> Users { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Rules = ObjectUtils.DeserializeVector<TlAbsPrivacyRule>(br);
-            Users = ObjectUtils.DeserializeVector<TlAbsUser>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Rules, bw);
-            ObjectUtils.SerializeObject(Users, bw);
-        }
     }
 }

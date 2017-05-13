@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1251549527)]
+    [SerializeAttribute(1251549527)]
     public class TlInputStickeredMediaPhoto : TlAbsInputStickeredMedia
     {
         public override int Constructor => 1251549527;

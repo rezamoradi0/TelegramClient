@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1815593308)]
+    [SerializeAttribute(1815593308)]
     public class TlDocumentAttributeImageSize : TlAbsDocumentAttribute
     {
         public override int Constructor => 1815593308;

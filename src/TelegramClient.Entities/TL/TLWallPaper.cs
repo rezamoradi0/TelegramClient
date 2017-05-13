@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-860866985)]
+    [SerializeAttribute(-860866985)]
     public class TlWallPaper : TlAbsWallPaper
     {
         public override int Constructor => -860866985;

@@ -2,38 +2,24 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Auth
 {
-    [TlObject(-841733627)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-841733627)]
     public class TlRequestBindTempAuthKey : TlMethod
     {
-        public override int Constructor => -841733627;
-
+        [SerializationOrder(0)]
         public long PermAuthKeyId { get; set; }
+
+        [SerializationOrder(1)]
         public long Nonce { get; set; }
+
+        [SerializationOrder(2)]
         public int ExpiresAt { get; set; }
+
+        [SerializationOrder(3)]
         public byte[] EncryptedMessage { get; set; }
+
         public bool Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            PermAuthKeyId = br.ReadInt64();
-            Nonce = br.ReadInt64();
-            ExpiresAt = br.ReadInt32();
-            EncryptedMessage = BytesUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            bw.Write(PermAuthKeyId);
-            bw.Write(Nonce);
-            bw.Write(ExpiresAt);
-            BytesUtil.Serialize(EncryptedMessage, bw);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

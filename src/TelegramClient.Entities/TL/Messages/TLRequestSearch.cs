@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-732523960)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-732523960)]
     public class TlRequestSearch : TlMethod
     {
-        public override int Constructor => -732523960;
-
         public int Flags { get; set; }
         public TlAbsInputPeer Peer { get; set; }
         public string Q { get; set; }

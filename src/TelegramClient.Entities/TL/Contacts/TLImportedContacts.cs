@@ -2,33 +2,18 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Contacts
 {
-    [TlObject(-1387117803)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1387117803)]
     public class TlImportedContacts : TlObject
     {
-        public override int Constructor => -1387117803;
-
+        [SerializationOrder(0)]
         public TlVector<TlImportedContact> Imported { get; set; }
+
+        [SerializationOrder(1)]
         public TlVector<long> RetryContacts { get; set; }
+
+        [SerializationOrder(2)]
         public TlVector<TlAbsUser> Users { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Imported = ObjectUtils.DeserializeVector<TlImportedContact>(br);
-            RetryContacts = ObjectUtils.DeserializeVector<long>(br);
-            Users = ObjectUtils.DeserializeVector<TlAbsUser>(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Imported, bw);
-            ObjectUtils.SerializeObject(RetryContacts, bw);
-            ObjectUtils.SerializeObject(Users, bw);
-        }
     }
 }

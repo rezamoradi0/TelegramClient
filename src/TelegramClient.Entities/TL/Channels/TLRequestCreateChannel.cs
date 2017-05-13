@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Channels
 {
-    [TlObject(-192332417)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-192332417)]
     public class TlRequestCreateChannel : TlMethod
     {
-        public override int Constructor => -192332417;
-
         public int Flags { get; set; }
         public bool Broadcast { get; set; }
         public bool Megagroup { get; set; }

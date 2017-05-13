@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-981018084)]
+    [SerializeAttribute(-981018084)]
     public class TlWebPagePending : TlAbsWebPage
     {
         public override int Constructor => -981018084;

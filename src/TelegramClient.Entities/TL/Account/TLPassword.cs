@@ -2,39 +2,24 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Account
 {
-    [TlObject(2081952796)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(2081952796)]
     public class TlPassword : TlAbsPassword
     {
-        public override int Constructor => 2081952796;
-
+        [SerializationOrder(0)]
         public byte[] CurrentSalt { get; set; }
+
+        [SerializationOrder(1)]
         public byte[] NewSalt { get; set; }
+
+        [SerializationOrder(2)]
         public string Hint { get; set; }
+
+        [SerializationOrder(3)]
         public bool HasRecovery { get; set; }
+
+        [SerializationOrder(4)]
         public string EmailUnconfirmedPattern { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            CurrentSalt = BytesUtil.Deserialize(br);
-            NewSalt = BytesUtil.Deserialize(br);
-            Hint = StringUtil.Deserialize(br);
-            HasRecovery = BoolUtil.Deserialize(br);
-            EmailUnconfirmedPattern = StringUtil.Deserialize(br);
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            BytesUtil.Serialize(CurrentSalt, bw);
-            BytesUtil.Serialize(NewSalt, bw);
-            StringUtil.Serialize(Hint, bw);
-            BoolUtil.Serialize(HasRecovery, bw);
-            StringUtil.Serialize(EmailUnconfirmedPattern, bw);
-        }
     }
 }

@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(1212395773)]
+    [SerializeAttribute(1212395773)]
     public class TlInputMediaGifExternal : TlAbsInputMedia
     {
         public override int Constructor => 1212395773;

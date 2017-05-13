@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-715532088)]
+    [SerializeAttribute(-715532088)]
     public class TlUserProfilePhoto : TlAbsUserProfilePhoto
     {
         public override int Constructor => -715532088;

@@ -2,47 +2,33 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-1347868602)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1347868602)]
     public class TlRequestGetHistory : TlMethod
     {
-        public override int Constructor => -1347868602;
-
+        [SerializationOrder(0)]
         public TlAbsInputPeer Peer { get; set; }
+
+        [SerializationOrder(1)]
         public int OffsetId { get; set; }
+
+        [SerializationOrder(2)]
         public int OffsetDate { get; set; }
+
+        [SerializationOrder(3)]
         public int AddOffset { get; set; }
+
+        [SerializationOrder(4)]
         public int Limit { get; set; }
+
+        [SerializationOrder(5)]
         public int MaxId { get; set; }
+
+        [SerializationOrder(6)]
         public int MinId { get; set; }
+
         public TlAbsMessages Response { get; set; }
-
-
-        public void ComputeFlags()
-        {
-        }
-
-        public override void DeserializeBody(BinaryReader br)
-        {
-            Peer = (TlAbsInputPeer) ObjectUtils.DeserializeObject(br);
-            OffsetId = br.ReadInt32();
-            OffsetDate = br.ReadInt32();
-            AddOffset = br.ReadInt32();
-            Limit = br.ReadInt32();
-            MaxId = br.ReadInt32();
-            MinId = br.ReadInt32();
-        }
-
-        public override void SerializeBody(BinaryWriter bw)
-        {
-            bw.Write(Constructor);
-            ObjectUtils.SerializeObject(Peer, bw);
-            bw.Write(OffsetId);
-            bw.Write(OffsetDate);
-            bw.Write(AddOffset);
-            bw.Write(Limit);
-            bw.Write(MaxId);
-            bw.Write(MinId);
-        }
 
         public override void DeserializeResponse(BinaryReader br)
         {

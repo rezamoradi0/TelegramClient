@@ -2,7 +2,7 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL
 {
-    [TlObject(-1744710921)]
+    [SerializeAttribute(-1744710921)]
     public class TlDocumentAttributeHasStickers : TlAbsDocumentAttribute
     {
         public override int Constructor => -1744710921;

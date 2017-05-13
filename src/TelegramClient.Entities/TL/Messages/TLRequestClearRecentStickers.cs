@@ -2,11 +2,11 @@ using System.IO;
 
 namespace TelegramClient.Entities.TL.Messages
 {
-    [TlObject(-1986437075)]
+    using TelegramClient.Serialization.Attributes;
+
+    [Serialize(-1986437075)]
     public class TlRequestClearRecentStickers : TlMethod
     {
-        public override int Constructor => -1986437075;
-
         public int Flags { get; set; }
         public bool Attached { get; set; }
         public bool Response { get; set; }
