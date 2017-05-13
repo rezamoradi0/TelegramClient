@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{04D496F9-ECE3-4F26-ABF7-FD4511112142}"
 EndProject
@@ -20,6 +20,11 @@ EndProject
 Project("{A0962598-ADB7-470F-ADDE-A812DDF7FE38}") = "TelegramClient.Serialization", "src\TelegramClient.Serialization\TelegramClient.Serialization.csproj", "{CD982596-B9EB-43E3-B382-2A2A98F22620}"
 EndProject
 Project("{0FFB6257-EE4F-4564-9563-89EACBE1BF0E}") = "TelegramClient.Serialization.UnitTests", "tests\TelegramClient.Serialization.UnitTests\TelegramClient.Serialization.UnitTests.csproj", "{753EAB10-F053-4157-BB2F-0ECC62AF676B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{679DFB1A-3BA6-450C-A42B-B6E3071EED37}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
