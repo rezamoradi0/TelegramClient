@@ -4,7 +4,12 @@ namespace TelegramClient.Entities.Generator
 {
     using Newtonsoft.Json;
 
-    internal class Method
+    internal interface IHaveParams
+    {
+        List<Param> Params { get; set; }
+    }
+
+    internal class Method : IHaveParams
     {
         public int Id { get; set; }
         public string method { get; set; }
@@ -21,7 +26,7 @@ namespace TelegramClient.Entities.Generator
         public string Type { get; set; }
     }
 
-    internal class Constructor
+    internal class Constructor: IHaveParams
     {
         public int Id { get; set; }
         public string Predicate { get; set; }
