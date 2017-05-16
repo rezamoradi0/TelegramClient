@@ -1,9 +1,10 @@
 ﻿<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk">
+
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="Models.fs" />
     <Compile Include="TlProcessor.fs" />
@@ -11,8 +12,11 @@
     <Content Include="scheme.tl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <PackageReference Include="FSharp.NET.Sdk">
-      <Version>1.0.4</Version>
-    </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharp.Core" Version="4.1.*" />
+    <PackageReference Include="FSharp.NET.Sdk" Version="1.0.*" PrivateAssets="All" />
+  </ItemGroup>
+
 </Project>
