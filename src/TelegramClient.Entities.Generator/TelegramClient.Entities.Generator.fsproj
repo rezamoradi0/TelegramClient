@@ -1,0 +1,18 @@
+﻿<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Models.fs" />
+    <Compile Include="TlProcessor.fs" />
+    <Compile Include="Program.fs" />
+    <Content Include="scheme.tl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <PackageReference Include="FSharp.NET.Sdk">
+      <Version>1.0.4</Version>
+    </PackageReference>
+  </ItemGroup>
+</Project>
