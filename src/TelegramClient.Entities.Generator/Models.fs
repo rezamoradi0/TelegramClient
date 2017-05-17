@@ -2,10 +2,10 @@ module Models
 
 open System;
 
-type Param = {Name: string; Type: string}
+type TlParam = {Name: string; Type: string}
 
-type Method = {Id: int; Method: string; Params: Param seq; Type: string }
+type TlMethod = {Id: int; Method: string; Params: TlParam list; Type: string }
 
-type Constructor = {Id: int; Predicate: string; Params: Param seq; Type: string }
+type TlType = {Id: int; Predicate: string; Params: TlParam list; Type: string }
 
-type Schema = {Constructors: Constructor seq; Methods: Method seq;}
+type Schema = {Types: TlType list; Methods: TlMethod list;}
