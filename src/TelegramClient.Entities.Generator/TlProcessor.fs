@@ -1,47 +1,71 @@
 module TlProcessor
 
+open System
+open System.Collections.Generic;
 open Models
 open System.Text.RegularExpressions
-
-let isCommented (line: string) =
+let private isCommented (line: string) =
     match line.StartsWith("//") with
     | true -> Some()
     | false -> None
 
-let isTypeRegion (line: string) =
+let private isTypeRegion (line: string) =
     match line with
     | "---types---" -> Some(true)
     | "---functions---" -> Some(false)
     | _ -> None
 
-let parseLine (line: string, schema: Schema) =
-    let matches = Regex.Matches(line, "^([a-zA-Z\.\_]*)#([0-9a-z]*) (.*) = (.*);$")
+let private parseLine (line: string) =
+    let matches = Regex.Matches(line, @"^([a-zA-Z\\.\\_0-9]*)#([0-9a-z]*)[ ]?(.*) = (.*);$")
     let groups = matches.Item(0).Groups
-    groups.Item(0).Value, groups.Item(1).Value, groups.Item(2).Value, groups.Item(3).Value
+    groups.Item(1).Value, groups.Item(2).Value, groups.Item(3).Value, groups.Item(4).Value
 
-let parseParams (line:string) =
-    line.Split(' ')
-    |> Seq.map(fun p -> 
-        let prms = p.Split(':')
-        { Name = prms.GetValue(0) :?> string; Type = prms.GetValue(1) :?> string}
-    )
+let private parseParams (line:string) =
+    match String.IsNullOrWhiteSpace line with 
+    | true -> Seq.empty
+    | false -> 
+        line.Split(' ')
+        |> Seq.map(fun p -> 
+            let prms = p.Split(':')
+            match prms.Length with
+            | 1 -> { Name = line; Type = line;}
+            | _ -> { Name = prms.GetValue(0) :?> string; Type = prms.GetValue(1) :?> string}
+            )
 
-// let createType parseResult = 
-//     let (name:string), (constr:string), (prms:string), (result:string) = parseResult
-    
+let private createMethod parseResult = 
+    let (sName:string), (sConstr:string), (sPrms:string), (sResult:string) = parseResult
+    let prms = parseParams sPrms
+            |> Seq.toList
+    {Id = Convert.ToInt32(sConstr, 16); Method = sResult; Params = prms; Type = sName }
 
+let private createType parseResult = 
+    let (sName:string), (sConstr:string), (sPrms:string), (sResult:string) = parseResult
+    let prms =  parseParams sPrms
+                |> Seq.toList
+    {Id = Convert.ToInt32(sConstr, 16); Predicate = sResult; Params = prms; Type = sName }
 
-// let Parse (schema:string[]) =
-//     let types = {new List<TlType>(); new List<TlMethod>()}
+let Parse (lines: string seq) =
+    let schema = {Types = new List<TlType>(); Methods = new List<TlMethod>()}
 
-//     let mutable isType = true
+    let mutable isType = true
 
-//     for line in schema do
-//         match isCommented line with
-//         | Some(_) -> ()
-//         | None -> 
-//             match isTypeRegion line with
-//             | Some(v) -> isType <- v
-//             | None -> 
-//                 let name, constr, prms, result = parseLine(line)
-//                 match isType with
+    for line in lines do
+        match String.IsNullOrWhiteSpace line with
+        | true -> ()
+        | false -> 
+            match isCommented line with
+            | Some(_) -> ()
+            | None -> 
+                match isTypeRegion line with
+                | Some(v) -> isType <- v
+                | None -> 
+                    match isType with
+                    | true -> 
+                        parseLine(line) 
+                        |> createType
+                        |> schema.Types.Add
+                    | false -> 
+                        parseLine(line) 
+                        |> createMethod
+                        |> schema.Methods.Add
+    schema

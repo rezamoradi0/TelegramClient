@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{679DFB1A-3BA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelegramClient.Serialization", "src\TelegramClient.Serialization\TelegramClient.Serialization.csproj", "{36CC875C-60D9-4940-AF0E-DC09A321A375}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TelegramClient.Entities.Generator", "src\TelegramClient.Entities.Generator\TelegramClient.Entities.Generator.fsproj", "{B0E4E1E8-FE32-4C5D-8462-9D4C4C62561C}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TelegramClient.Entities.Generator", "src\TelegramClient.Entities.Generator\TelegramClient.Entities.Generator.fsproj", "{98BE8DBD-037C-4D39-A7D4-F0B0A3299897}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +51,10 @@ Global
 		{36CC875C-60D9-4940-AF0E-DC09A321A375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36CC875C-60D9-4940-AF0E-DC09A321A375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36CC875C-60D9-4940-AF0E-DC09A321A375}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0E4E1E8-FE32-4C5D-8462-9D4C4C62561C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0E4E1E8-FE32-4C5D-8462-9D4C4C62561C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0E4E1E8-FE32-4C5D-8462-9D4C4C62561C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0E4E1E8-FE32-4C5D-8462-9D4C4C62561C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98BE8DBD-037C-4D39-A7D4-F0B0A3299897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98BE8DBD-037C-4D39-A7D4-F0B0A3299897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98BE8DBD-037C-4D39-A7D4-F0B0A3299897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98BE8DBD-037C-4D39-A7D4-F0B0A3299897}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,7 +65,7 @@ Global
 		{51FD7794-A861-439A-9CA3-75C4232E9CAC} = {78830552-5E51-43BD-B510-7D59813B0CC9}
 		{D258CC09-CBC8-4183-B60C-7C116A1E126F} = {78830552-5E51-43BD-B510-7D59813B0CC9}
 		{36CC875C-60D9-4940-AF0E-DC09A321A375} = {04D496F9-ECE3-4F26-ABF7-FD4511112142}
-		{B0E4E1E8-FE32-4C5D-8462-9D4C4C62561C} = {04D496F9-ECE3-4F26-ABF7-FD4511112142}
+		{98BE8DBD-037C-4D39-A7D4-F0B0A3299897} = {04D496F9-ECE3-4F26-ABF7-FD4511112142}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

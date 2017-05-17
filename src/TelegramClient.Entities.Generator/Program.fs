@@ -1,10 +1,16 @@
 ﻿module Program
 
 open System
-open System.IO;
+open System.IO
+
+open Models
+open TlProcessor
 
 [<EntryPoint>]
 let main argv = 
-    let scheme = File.ReadLines("scheme.tl")
+    File.ReadLines("scheme.tl")
+    |> Parse 
+
+    Console.ReadLine() |> ignore
     0
         
