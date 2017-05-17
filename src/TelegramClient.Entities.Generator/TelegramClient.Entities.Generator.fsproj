@@ -8,8 +8,15 @@
   <ItemGroup>
     <Compile Include="Models.fs" />
     <Compile Include="TlProcessor.fs" />
+    <Compile Include="EntitiesGenerator.fs" />
     <Compile Include="Program.fs" />
     <Content Include="scheme.tl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Method.tmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Type.tmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

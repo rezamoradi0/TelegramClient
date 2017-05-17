@@ -1,0 +1,12 @@
+﻿namespace /* NAMESPACE */
+{
+	using System;
+	using TelegramClient.Entities;
+	using TelegramClient.Serialization;
+
+	[Serialize(/*Constructor*/)]
+    public class /* NAME */ : /* PARENT */
+    {
+/* PARAMS */
+    }
+}

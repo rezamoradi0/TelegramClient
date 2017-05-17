@@ -44,7 +44,7 @@ let private createType parseResult =
                 |> Seq.toList
     {Id = Convert.ToInt32(sConstr, 16); Predicate = sResult; Params = prms; Type = sName }
 
-let Parse (lines: string seq) =
+let parseTlSchema (lines: string seq) =
     let schema = {Types = new List<TlType>(); Methods = new List<TlMethod>()}
 
     let mutable isType = true

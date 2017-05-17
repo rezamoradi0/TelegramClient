@@ -5,12 +5,13 @@ open System.IO
 
 open Models
 open TlProcessor
+open EntitiesGenerator
 
 [<EntryPoint>]
 let main argv = 
     File.ReadLines("scheme.tl")
-    |> Parse 
+    |> parseTlSchema 
+    |> generateEntities
 
-    Console.ReadLine() |> ignore
     0
         
