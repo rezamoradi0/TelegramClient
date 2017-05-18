@@ -4,9 +4,7 @@
 	using TelegramClient.Entities;
 	using TelegramClient.Serialization;
 
-	[Serialize(/*Constructor*/)]
-    public class /* NAME */ : /* PARENT */
+    public interface /* NAME */ : ITlObject
     {
-/* PARAMS */
     }
 }

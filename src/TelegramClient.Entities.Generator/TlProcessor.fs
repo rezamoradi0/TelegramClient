@@ -36,13 +36,13 @@ let private createMethod parseResult =
     let (sName:string), (sConstr:string), (sPrms:string), (sResult:string) = parseResult
     let prms = parseParams sPrms
             |> Seq.toList
-    {Id = Convert.ToInt32(sConstr, 16); Method = sResult; Params = prms; Type = sName }
+    {Id = "0x" + sConstr; Method = sResult; Params = prms; Type = sName }
 
 let private createType parseResult = 
     let (sName:string), (sConstr:string), (sPrms:string), (sResult:string) = parseResult
     let prms =  parseParams sPrms
                 |> Seq.toList
-    {Id = Convert.ToInt32(sConstr, 16); Predicate = sResult; Params = prms; Type = sName }
+    {Id = "0x" + sConstr; Predicate = sName; Params = prms; Type = sResult }
 
 let parseTlSchema (lines: string seq) =
     let schema = {Types = new List<TlType>(); Methods = new List<TlMethod>()}
