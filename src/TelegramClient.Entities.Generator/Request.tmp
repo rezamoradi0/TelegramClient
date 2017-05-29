@@ -4,8 +4,8 @@
 	using TelegramClient.Entities;
 	using TelegramClient.Serialization;
 
-	[Serialize(/*Constructor*/)]
-    public class /* NAME */ : /* PARENT */
+	[Serialize(/* CONSTRUCTOR */)]
+    public class /* NAME */ : IRequest</* GENERIC_PARAM */>
     {
 /* PARAMS */
     }

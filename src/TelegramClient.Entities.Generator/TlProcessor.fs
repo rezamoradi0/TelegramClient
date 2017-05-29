@@ -16,9 +16,9 @@ let private isTypeRegion (line: string) =
     | _ -> None
 
 let private parseLine (line: string) =
-    let matches = Regex.Matches(line, @"^([a-zA-Z\\.\\_0-9]*)#([0-9a-z]*)[ ]?(.*) = (.*);$")
-    let groups = matches.Item(0).Groups
-    groups.Item(1).Value, groups.Item(2).Value, groups.Item(3).Value, groups.Item(4).Value
+    let matches = Regex.Match(line, @"^([\w\d\.\\_0-9]*)#([\w\d]*)\ ?(\{.*\})?\ ?#? ?\[? ?t? ?\]? ?(.*)? = (.*);$")
+    let groups = matches.Groups
+    groups.Item(1).Value, groups.Item(2).Value, groups.Item(3).Value, groups.Item(4).Value, groups.Item(5).Value
 
 let private parseParams (line:string) =
     match String.IsNullOrWhiteSpace line with 
@@ -33,23 +33,26 @@ let private parseParams (line:string) =
             )
 
 let private createMethod parseResult = 
-    let (sName:string), (sConstr:string), (sPrms:string), (sResult:string) = parseResult
+    let (sName:string), (sConstr:string), (sGenericType:string), (sPrms:string), (sResult:string) = parseResult
     let prms = parseParams sPrms
             |> Seq.toList
-    {Id = "0x" + sConstr; Method = sResult; Params = prms; Type = sName }
+    {Id = "0x" + sConstr; Method = sName; GenericType = sGenericType; Params = prms; Type = sResult }
 
 let private createType parseResult = 
-    let (sName:string), (sConstr:string), (sPrms:string), (sResult:string) = parseResult
+    let (sName:string), (sConstr:string), (sGenericType:string), (sPrms:string), (sResult:string) = parseResult
     let prms =  parseParams sPrms
                 |> Seq.toList
-    {Id = "0x" + sConstr; Predicate = sName; Params = prms; Type = sResult }
+    {Id = "0x" + sConstr; Predicate = sName; GenericType = sGenericType; Params = prms; Type = sResult }
 
 let parseTlSchema (lines: string seq) =
-    let schema = {Types = new List<TlType>(); Methods = new List<TlMethod>()}
+    let schema = {Types = new List<TlType>(); Requests = new List<TlRequest>()}
 
     let mutable isType = true
 
+    let mutable i = 1
     for line in lines do
+        i <- i + 1
+        
         match String.IsNullOrWhiteSpace line with
         | true -> ()
         | false -> 
@@ -67,5 +70,5 @@ let parseTlSchema (lines: string seq) =
                     | false -> 
                         parseLine(line) 
                         |> createMethod
-                        |> schema.Methods.Add
+                        |> schema.Requests.Add
     schema

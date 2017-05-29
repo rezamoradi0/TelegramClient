@@ -5,8 +5,8 @@
 	using TelegramClient.Serialization;
 
 	[Serialize(/* CONSTRUCTOR */)]
-    public class /* NAME */ : /* PARENT */
-    {
+	public class /* NAME */ : /* PARENT */
+	{
 /* PARAMS */
-    }
+	}
 }

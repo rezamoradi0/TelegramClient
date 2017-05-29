@@ -6,6 +6,7 @@ open System
 open System.Collections.Generic
 open System.IO
 open System.Text
+open System.Text.RegularExpressions
 
 let defaultNamespace = "TelegramClient.Entities"
 let baseObjectInterface = "ITlObejct"
@@ -16,10 +17,12 @@ let entitiesFodler = "_Entities"
 let namespaceMarker = "/* NAMESPACE */"
 
 let constructorMarker = "/* CONSTRUCTOR */"
+let requestParamMarker = "/* GENERIC_PARAM */"
 
 let nameMarker = "/* NAME */"
 
 let parentMarker = "/* PARENT */"
+let serializeMarker = "/* SERIALIZE */"
 let paramMarker = "/* PARAMS */"
 
 let formatName (name: string) =
@@ -43,9 +46,8 @@ let getClassNameFromInterface (typeName:string) =
     getName typeName
     |> sprintf "I%s"
 
-// let getClassNameFromMethod (tlMethod: TlMethod) = 
-//      getName typeName
-//     |> sprintf "Request%s"
+let containsName (interfacesSet: HashSet<string>) (tlType:string) =
+    tlType.ToLower() |> interfacesSet.Contains
 
 let getShotNamespace (typeName: string) = 
     match typeName.Contains(".") with
@@ -62,8 +64,68 @@ let getFullNamespace (typeName: string) =
     | true -> defaultNamespace
     | false -> defaultNamespace + "." + shortNamespace
 
-let getParametersForEntity (prms: TlParam list) = 
-    ""
+let genericTypeReg = Regex("(.*)\<(.*)\>")
+
+let validTypes = HashSet [|"string"; "int"; "long"; "long"; "double"|]
+
+let rec typeMapping (typeSet: HashSet<string>) (tlType:string) = 
+    match tlType with
+    | ltType when validTypes.Contains(tlType.ToLower()) -> tlType
+    | "vector" -> "Vector"
+    | "int128" -> "byte[]"
+    | "int256" -> "byte[]"
+    | "bytes" -> "byte[]"
+    | "#" -> "BitArray"
+    | "Bool" -> "bool"
+    | "true" -> "bool"
+    | tlType when containsName typeSet tlType -> formatName tlType
+    | tlType when genericTypeReg.IsMatch(tlType) -> 
+        let group = genericTypeReg.Match(tlType).Groups
+        
+        let genericClass =  group.Item(1).Value |> typeMapping typeSet
+        let genericParameter =  group.Item(2).Value |> typeMapping typeSet
+
+        sprintf "%s<%s>" genericClass genericParameter
+    | tlType when tlType.Contains("?")-> 
+        tlType.Split('?')
+        |> Array.last
+        |> typeMapping typeSet
+    | _ -> tlType
+
+
+let expressionReg = Regex(@"(\w*)\.(\d\d?)\?(\w*)")
+
+let getSerializeAttribute(tlParam: TlParam) =
+    match tlParam.Type.Contains("?") with
+    | false -> None
+    | true -> 
+        let group = expressionReg.Match(tlParam.Type)
+        let fieldName = group.Groups.Item(1).Value |> formatName
+        let index = group.Groups.Item(2).Value
+        let resultType = group.Groups.Item(3).Value
+        
+        match resultType with
+        | "true" -> sprintf """       [FromFlag("%s", %s)]""" fieldName index |> Some
+        | _ -> sprintf """       [CanSerialize("%s", %s)]""" fieldName index |> Some
+
+let getParametersForEntity (typeSet: HashSet<string> , prms: TlParam list) = 
+    let result = List<string>()
+    prms
+    |> Seq.ofList
+    |> Seq.iteri(fun i p ->
+        let paramType = typeMapping typeSet p.Type
+        let paramName = formatName p.Name
+
+        sprintf "       [SerializationOrder(%i)]" i |> result.Add
+        
+        match getSerializeAttribute p with
+        | Some(value) -> result.Add value
+        | None -> ()
+
+        sprintf "       public %s %s {get; set;}\n" paramType paramName |> result.Add
+    )
+
+    result |> String.concat "\n"
 
 let createFile (nmsp:string) (className: string) (interfaceFolder: string) (content: string) = 
     let nmsp =  match String.IsNullOrEmpty(nmsp) with
@@ -81,44 +143,50 @@ let createFile (nmsp:string) (className: string) (interfaceFolder: string) (cont
 
     File.WriteAllText(path, content, Encoding.UTF8)
 
-let createEntityFile (className: string) (interfaceName) (interfacesHash: HashSet<string>)=
-    let nmsp = getShotNamespace(className)
-    let className = getClassNameFromEntity(className)
+let createEntityFile (tlType: TlType) (interfacesHash: HashSet<string>)=
+    let nmsp = getShotNamespace(tlType.Predicate)
+    let className = getClassNameFromEntity(tlType.Predicate)
 
-    match interfacesHash.Contains interfaceName with
-    | true ->  getName interfaceName |> createFile nmsp className
+    match containsName interfacesHash tlType.Type with
+    | true ->  getName tlType.Type |> createFile nmsp className
     | false ->  createFile nmsp className String.Empty
 
-let createInterafaceFile (typeName: string) =
+let createInterfaceFile (typeName: string) =
     let nmsp = getShotNamespace(typeName)
     let interfaceName = getClassNameFromInterface(typeName)
     let name = getName typeName
     createFile nmsp interfaceName name
 
-// let createRequestFile (tlMethod: TlMethod) =
-//     let nmsp = getShotNamespace(tlMethod.Type)
-//     let className = getClassNameFromMethod(tlMethod)
-//     createFile nmsp className String.Empty
-
-let IsInterface (schema : Schema) (tlType: TlType) (interfacesHash: HashSet<string>) =
-    match interfacesHash.Contains(tlType.Type) with
-    | true -> Some()
-    | false -> 
-        let lenght = schema.Types
-                    |> Seq.filter(fun t -> t.Type = tlType.Type)
-                    |> Seq.length
-
-        match lenght > 1 with
-        | true -> Some()
-        | _ -> None
-
-let getParentForType (tlType: TlType, interfacesHash: HashSet<string>) =
+let getParentForType (tlType: TlType, interfacesSet: HashSet<string>) =
     match tlType.Type = tlType.Predicate with
     | true -> baseObjectInterface
     | false -> 
-        match interfacesHash.Contains tlType.Type with
+        match containsName interfacesSet tlType.Type with
         | true -> getClassNameFromInterface(tlType.Type)
         | false -> baseObjectInterface
+
+
+let getClassNameFromRequest (tlRequest: TlRequest) = 
+     getName tlRequest.Method
+    |> sprintf "Request%s"
+
+let getGenericParamRequest (tlRequest: TlRequest, interfacesSet: HashSet<string>) = 
+    let name = getName tlRequest.Type
+    match containsName interfacesSet name with
+    | true -> getClassNameFromInterface(tlRequest.Type)
+    | false -> name
+
+let getFileNameFromRequest (tlRequest: TlRequest) = 
+    let className = getClassNameFromRequest tlRequest
+    className.Replace("<", "").Replace(">", "")
+    
+let createRequestFile (tlMethod: TlRequest) (interfacesHash: HashSet<string>) =
+    let nmsp = getShotNamespace(tlMethod.Type)
+    let fileName = getFileNameFromRequest(tlMethod)
+
+    match containsName interfacesHash tlMethod.Type with
+    | true ->  getName tlMethod.Type |> createFile nmsp fileName
+    | false ->  createFile nmsp fileName String.Empty
 
 let generateEntities (schema: Schema) = 
     if Directory.Exists outFodler then
@@ -129,33 +197,44 @@ let generateEntities (schema: Schema) =
     let interfaceTemplate = File.ReadAllText("Interface.tmp");
 
     let interfacesHash = new HashSet<string>()
-    let typesList = schema.Types
-                    |> Seq.map(fun t -> t.Type)
-                    |> List.ofSeq
+    let typesHash = schema.Types
+                    |> Seq.map(fun t -> t.Predicate.ToLower())
+                    |> HashSet<string>
+    schema.Types
+    |> Seq.map(fun t -> t.Type)
+    |> Seq.forall(fun t -> 
+            let name = t.ToLower()
+            name |>  interfacesHash.Add |> ignore
+            name |> typesHash.Add |> ignore
+            true
+        )
+    |> ignore
 
     for tlType in schema.Types do
-        if IsInterface schema tlType interfacesHash = Some() then
-            interfacesHash.Add tlType.Type |> ignore
+        if containsName interfacesHash tlType.Type then
             StringBuilder(interfaceTemplate)
                 .Replace(namespaceMarker, getFullNamespace(tlType.Type))
                 .Replace(nameMarker, getClassNameFromInterface(tlType.Type))
                 .ToString()
-            |> createInterafaceFile tlType.Type
+            |> createInterfaceFile tlType.Type
 
         StringBuilder(entityTemplate)
             .Replace(constructorMarker, tlType.Id)
             .Replace(parentMarker, getParentForType(tlType, interfacesHash))
             .Replace(namespaceMarker, getFullNamespace(tlType.Predicate))
             .Replace(nameMarker, getClassNameFromEntity(tlType.Predicate))
-            .Replace(paramMarker, getParametersForEntity(tlType.Params))
+            .Replace(paramMarker, getParametersForEntity(typesHash, tlType.Params))
             .ToString()
-        |> createEntityFile tlType.Predicate tlType.Type interfacesHash
+        |> createEntityFile tlType interfacesHash
 
-
-        // use stream = createTypeFile tlType interfacesHash
-        
-    
-    // for tlMethod in schema.Methods do
-        // createMethodFile tlMethod
+    for tlRequest in schema.Requests do
+     StringBuilder(requestTemplate)
+            .Replace(constructorMarker, tlRequest.Id)
+            .Replace(namespaceMarker, getFullNamespace(tlRequest.Method))
+            .Replace(requestParamMarker, getGenericParamRequest(tlRequest, interfacesHash))
+            .Replace(nameMarker, getClassNameFromRequest(tlRequest))
+            .Replace(paramMarker, getParametersForEntity(typesHash, tlRequest.Params))
+            .ToString()
+        |> createRequestFile tlRequest interfacesHash
     
 ()
